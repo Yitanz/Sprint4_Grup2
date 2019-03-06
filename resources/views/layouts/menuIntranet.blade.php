@@ -60,6 +60,10 @@
             <li class="nav-item">
               <a class="nav-link nav-interior {{ request()->routeIs('atraccions.index') ? 'active' : '' }}" href="{{URL::route('atraccions.index')}}"><span data-feather="file-text"></span>Gestionar Atraccions</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link nav-interior {{ request()->routeIs('atraccions.assigna') ? 'active' : '' }}" href="{{URL::route('atraccions.assigna')}}"><span data-feather="file-text"></span>Assignar Atraccions</a>
+            </li>
+
           </ul>
           
 

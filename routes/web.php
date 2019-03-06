@@ -43,16 +43,26 @@
  }]);
 
  /* RUTES GRUP 2 */
+
+ Route::get('/gestio/atraccions/crearassignaciomanteniment', 'AtraccionsController@crearAssignacioManteniment')->name('atraccions.crearassignaciomanteniment');
+
+ Route::get('/gestio/atraccions/crearassignacioneteja', 'AtraccionsController@crearAssignacioNeteja')->name('atraccions.crearassignacioneteja');
+
+ Route::get('/gestio/atraccions/crearassignaciogeneral', 'AtraccionsController@crearAssignacioGeneral')->name('atraccions.crearassignaciogeneral');
+
+ Route::get('/gestio/atraccions/crearassignaciogeneral/{$id}', 'AtraccionsController@guardarAssignacio');
+
+ Route::get('/gestio/atraccions/assigna', 'AtraccionsController@assigna')->name('atraccions.assigna');
+
  Route::resource('/gestio/atraccions', 'AtraccionsController')->middleware(['auth','is_admin','verified']);
 
  Route::get('/gestio/atraccions/image', 'AtraccionsController@store')->name('image.upload')->middleware(['auth','is_admin','verified']);
+
  Route::post('/gestio/atraccions/image', 'AtraccionsController@store')->name('image.upload.post')->middleware(['auth','is_admin','verified']);
 
  Route::resource('/gestio/clients', 'ClientsController')->middleware(['auth','is_admin','verified']);
  
- /* A SABER */
- Route::get('/view/vustesoarc/atraccions', 'AtraccionsController@index');
-
+ 
  /* Guardar PDF */
  Route::get('/view/atraccions/index', 'AtraccionsController@guardarPDF');
 
