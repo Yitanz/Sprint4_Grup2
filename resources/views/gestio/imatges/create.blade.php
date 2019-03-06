@@ -35,6 +35,16 @@
                     <span class="invalid-feedback" role="alert"> <strong>{{$errors->first('description')}}</strong></span>
                 @endif
                 </div>
+                <br>
+            </div>
+
+            <div class="form-group row">
+                <select name="atraccio" class="form-control form-control-sm" style="margin-left: 195px; margin-right: 135px;">
+                  @foreach ($atraccions as $atraccionetes)
+                  <option value="{{$atraccionetes->id}}">{{$atraccionetes->nom_atraccio}}</option>
+                  @endforeach
+                </select>
+                
             </div>
             <div class="form-group row">
                   <div class="col-md-6 offset-md-3">

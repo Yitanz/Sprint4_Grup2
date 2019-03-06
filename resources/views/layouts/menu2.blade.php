@@ -19,6 +19,9 @@
         <a class="nav-link" href="{{URL::route('entrades')}}">Compra entrades</a>
       </li>
       <li class="nav-item dropdown">
+        <a class="nav-link" href="{{URL::route('tenda')}}">Tenda</a>
+      </li>
+      <li class="nav-item dropdown">
         <a class="nav-link" href="{{URL::route('contacte')}}">Contacte</a>
       </li>
 

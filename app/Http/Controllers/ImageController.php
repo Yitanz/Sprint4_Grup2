@@ -7,10 +7,10 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Http\File;
-
+use \App\Atraccion;
 use \App\Imatge;
 use Input;
-
+use \App\Producte;
 use Image;
 
 //use Illuminate\Http\Request;
@@ -20,7 +20,10 @@ class ImageController extends Controller
     
 	public function create()
 	{
-		return view ('gestio/imatges/create');
+
+		$atraccions=DB::table('atraccions')->get();
+		return view ('gestio/imatges/create', compact("atraccions"));
+
 	}
 
    	public function save(Request $request)
@@ -33,11 +36,11 @@ class ImageController extends Controller
 		   
 		//agafant les dades
 		$image_path = $request->file('image_path');
-		
 		$description = $request->input('description');
-		      
+		$id_atraccio = $request->get('atraccio');
 
 		    $file = $request->file('image_path');
+
 		    $file_name = time() . $file->getClientOriginalName();
 		    $file_path = 'img';
 		    $img = Image::make($file->getRealPath())->resize(800, 600)
@@ -93,12 +96,25 @@ class ImageController extends Controller
 
 	    $imageAigua="img/"."marca".$description;
 
+	    $preu=5;
+	    $mida= "800x600px";
+
 	    $imatge = new Imatge();
 	    $imatge->foto_path=$image_path;
 	    $imatge->foto_path_aigua=$imageAigua;
 	    $imatge->nom=$description;
+	    $imatge->preu=$preu;
+	    $imatge->mida=$mida;
+	    $imatge->id_atraccio=$id_atraccio;
 	    $imatge->save();
 
-	   	return view('gestio/imatges/create');
+
+	    $imatge_product = new Producte();
+	    $imatge_product->descripcio=$description;
+	    $imatge_product->atributs=$nom;
+	    $imatge_product->estat="actiu";
+
+		$atraccions=DB::table('atraccions')->get();
+	   	return view('gestio/imatges/create',compact("atraccions"));
 	}
 }
