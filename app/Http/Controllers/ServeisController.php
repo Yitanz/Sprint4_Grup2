@@ -132,9 +132,9 @@ class ServeisController extends Controller
 
       $servei->id_zona = $request->get('seleccio_zona');
       $servei->id_servei = $request->get('nom_servei');
-      $servei->id_empleat = $request->get('seleccio_empleat');
-      $servei->data_inici = $request->get('data_inici_assign');
-      $servei->data_fi = $request->get('data_fi_assign');
+      $servei->id_empleat = $request->get('data_inici_assign');
+      $servei->data_inici = $request->get('data_fi_assign');
+      $servei->data_fi = $request->get('seleccio_empleat');
       $servei->id_estat = 2;
       $servei->save();
 

@@ -15,8 +15,7 @@
           <div class="col-md-12 px-4">
             <h5>Selecciona la Zona a assignar</h5>
           </div>
-         <form class="needs-validation" method="post" action="{{ route('serveis.update' , $assign->id) }}">
-           @method('PATCH')
+         <form class="needs-validation" method="post" action="{{ route('serveis.store') }}">
            @csrf
            <table class="table">
               <thead>
@@ -32,11 +31,7 @@
             <tr>
                 <td>{{ $zona->id }}</td>
                 <td>{{ $zona->nom }}</td>
-                @if($zona->id == $assign->id_zona)
-              <td><input type="radio" class="form-check-input" name="seleccio_zona" value="{{ $zona->id }}" checked="checked"></td>
-              @else
               <td><input type="radio" class="form-check-input" name="seleccio_zona" value="{{ $zona->id }}"></td>
-              @endif
             </tr>
             @endforeach
           </tbody>
@@ -45,10 +40,10 @@
         </table>
         <br/>
         <h5>Selecciona la data d'inici</h5>
-      <input class="form-control" type="date" name="data_inici_assign" value="{{ $assign->data_inici }}">
+      <input class="form-control" type="date" name="data_inici_assign">
         <br/>
         <h5>Selecciona la data límit</h5>
-        <input class="form-control" type="date" name="data_fi_assign" value="{{ $assign->data_fi }}">
+        <input class="form-control" type="date" name="data_fi_assign">
         <br/>
         <br/>
         <table class="table">
@@ -65,11 +60,7 @@
             <tr>
               <td>{{ $servei->id }}</td>
               <td>{{ $servei->nom }}</td>
-              @if($servei->id == $assign->id_servei)
-              <td><input type="radio" class="form-check-input" name="nom_servei" value="{{ $servei->id }}" checked="checked"></td>
-              @else
               <td><input type="radio" class="form-check-input" name="nom_servei" value="{{ $servei->id }}"></td>
-              @endif
             </tr>
             @endforeach
           </tbody>
@@ -102,11 +93,8 @@
                   <td>{{ $treballador->cognom1 }}</td>
                   <td>{{ $treballador->cognom2 }}</td>
                   <td>{{ $treballador->numero_document }}</td>
-                  @if($treballador->id == $assign->id_empleat)
-                <td><input type="checkbox" class="form-check-input" name="seleccio_empleat" value="{{ $treballador->id }}" checked="checked"></td>
-                @else
-                <td><input type="checkbox" class="form-check-input" name="seleccio_empleat" value="{{ $treballador->id }}"></td>
-                @endif
+                <td><input type="checkbox" class="form-check-input" name="seleccio_empleat" value="{{ $treballador->id }}">
+                </td>
               </tr>
               @endforeach
             </tbody>
