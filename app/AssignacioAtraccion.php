@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class AssignacioAtraccio extends Model
+class AssignacioAtraccion extends Model
 {
   protected $table = "assign_emp_atraccions";
   

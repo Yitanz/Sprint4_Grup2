@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\File;
 use Image;
 use PDF;
 use Carbon;
+use \App\AssignacioAtraccion;
+
 
 use \App\Horari;
 use \App\Rol;
@@ -238,24 +240,23 @@ class AtraccionsController extends Controller
 
             ]);
 
-        $atraccions = Atraccion::all();
+        //$atraccions = Atraccion::all();
         return view('/gestio/atraccions/assigna', compact('atraccionetes'));
     }
 
 
-
-    public function crearAssignacioManteniment()
+    public function crearAssignacioManteniment($id)
     {
-
+        $atraccio = Atraccion::find($id);
         $users = User::whereNotNull('email_verified_at')
-        ->where('id_rol','!=',1)
+        ->where('id_rol',3)
         ->whereNotNull('id_dades_empleat')
         ->leftJoin('dades_empleats','dades_empleats.id', 'users.id_dades_empleat')
         ->leftJoin('rols','rols.id', 'users.id_rol')
         ->leftJoin('horaris', 'horaris.id', 'dades_empleats.id_horari')
         ->get([
-            'users.id',
-            'users.nom',
+            'users.id as id',
+            'users.nom as nom',
             'users.cognom1',
             'users.cognom2',
             'users.email',
@@ -280,17 +281,16 @@ class AtraccionsController extends Controller
             'dades_empleats.data_fi_contracte as data_fi_contracte',
             'horaris.torn as id_horari',
         ]);
-    
 
-        return view('/gestio/atraccions/crearassignaciomanteniment', compact('users'));
+        return view('/gestio/atraccions/crearassignaciomanteniment', compact('users', 'atraccio'));
     }
 
 
-    public function crearAssignacioNeteja()
+    public function crearAssignacioNeteja($id)
     {
-
+        $atraccio = Atraccion::find($id);
         $users = User::whereNotNull('email_verified_at')
-        ->where('id_rol','!=',1)
+        ->where('id_rol',4)
         ->whereNotNull('id_dades_empleat')
         ->leftJoin('dades_empleats','dades_empleats.id', 'users.id_dades_empleat')
         ->leftJoin('rols','rols.id', 'users.id_rol')
@@ -328,8 +328,9 @@ class AtraccionsController extends Controller
     }
 
 
-    public function crearAssignacioGeneral()
+    public function crearAssignacioGeneral($id)
     {
+        $atraccio = Atraccion::find($id);
 
         $users = User::whereNotNull('email_verified_at')
         ->where('id_rol','!=',1)
@@ -338,8 +339,8 @@ class AtraccionsController extends Controller
         ->leftJoin('rols','rols.id', 'users.id_rol')
         ->leftJoin('horaris', 'horaris.id', 'dades_empleats.id_horari')
         ->get([
-            'users.id',
-            'users.nom',
+            'users.id as id_empleat',
+            'users.nom as nom_empleat',
             'users.cognom1',
             'users.cognom2',
             'users.email',
@@ -366,18 +367,25 @@ class AtraccionsController extends Controller
         ]);
     
 
-        return view('/gestio/atraccions/crearassignaciogeneral', compact('users'));
+        return view('/gestio/atraccions/crearassignaciogeneral', compact('users', 'atraccio'));
     }
 
 
-    public function guardarAssignacio(Request $request)
+    public function guardarAssignacio(Request $request, $id)
     {
-        $assignacio = AssignacioAtraccion([
+        $atraccio = Atraccion::find($id);
 
+        $assignacio = new AssignacioAtraccion([
+            'id_empleat'=>$request->get('id_empleat'),
+            'id_atraccio'=>$request->get('id_atraccio'),
             'data_inici'=>$request->get('data_inici_assignacio_empleat'),
             'data_fi'=>$request->get('data_fi_assignacio_empleat')
         ]);
-        
+        $assignacio->save();
+
+        return redirect('/gestio/atraccions/assigna')->with('success', 'OK bro :)');
+
+
     }
 
 

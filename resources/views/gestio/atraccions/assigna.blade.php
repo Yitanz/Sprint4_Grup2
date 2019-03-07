@@ -66,10 +66,10 @@
                 </div>
               </div>
             </div>
-<!-- FI MODAL FOTO -->
-@else
-@endif
-            <td><a href="{{ route('atraccions.crearassignaciomanteniment')}}" class="btn btn-primary">Manteniment</a></td>
+            <!-- FI MODAL FOTO -->
+            @else
+            @endif
+            <td><a href="{{ route('atraccions.crearassignaciomanteniment',$atraccio->id)}}" class="btn btn-primary">Manteniment</a></td>
             <td><a href="{{ route('atraccions.crearassignacioneteja',$atraccio->id)}}" class="btn btn-primary">Neteja</a></td>
             <td><a href="{{ route('atraccions.crearassignaciogeneral',$atraccio->id)}}" class="btn btn-primary">Treballador</a></td>
 

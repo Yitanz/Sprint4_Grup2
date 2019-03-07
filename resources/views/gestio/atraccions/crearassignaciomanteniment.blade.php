@@ -31,19 +31,6 @@
             </div>
           </div>
 
-            <form method="post" style="margin-top=50px;">
-              <div class="form-row">
-                <div class="col-10">
-                  <input class="form-control" type="text" name="busqueda_habitacio" placeholder="Filtrar...">
-                </div>
-                <div class="form-group row">
-                  <div class="offset-sm-2 col-sm-10">
-                    <input type="submit" class="btn btn-primary" name="buscar_habitacio" value="Filtrar">
-                  </div>
-                </div>
-              </div>
-            </form>
-
             <div class="table-responsive">
                 <table class="table table-bordered table-hover table-sm">
                     <thead class="thead-light">
@@ -62,7 +49,6 @@
                 <tbody>
 
                     @foreach($users as $user)
-                    @if($user->id_rol == 3)
 
                     <tr>
                         <td>{{ $user->nom }}</td>
@@ -73,24 +59,34 @@
                         <td>{{ $user->especialitat }}</td>
                         <td>{{ $user->carrec }}</td>
                         <td>{{ $user->id_horari }}</td>
-                        <td><a class="btn btn-success" href="{{ route('empleats.show', $user->id) }}" data-toggle="modal" data-target="#exampleModal">Assignar</a></td>
+                        <td><a class="btn btn-success" href="#" data-toggle="modal" data-target="#ModalEmpleat{{$user->id}}">Assignar</a></td>
                     </tr>
-                    @endif
-                    @endforeach
-                    </tbody>
-                </table>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <!-- Modal -->
+<div class="modal fade" id="ModalEmpleat{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Assignar Empleat</h5>
+        <h5 class="modal-title">Assignar Empleat</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+      <form method="post" action="{{ route('atraccions.guardarAssignacio', $atraccio->id) }}" >
+      @csrf
       <div class="modal-body">
+        <div class="row">
+          <div class="col-6">
+            <h4>Atraccio:</h4>
+            <input type="text" class="form-control" name="id_atraccio" value="{{ $atraccio->id }}" hidden/>
+            <input type="text" class="form-control" name="nom_atraccio" value="{{ $atraccio->nom_atraccio }}" disabled />
+          </div>
+          <div class="col-6">
+            <h4>Empleat:</h4>
+            <input type="text" class="form-control" name="id_empleat" value="{{ $user->id }}" hidden />
+            <input type="text" class="form-control" name="nom_empleat" disabled value="{{ $user->nom}}"/>
+          </div>
+        </div>
         <div class="row">
           <div class="col-6">
             <h4>Data Inici </h4>
@@ -98,16 +94,22 @@
             </div>
             <div class="col-6">
             <h4>Data Fi </h4>
-            <input type=date name="data_inici_fi_empleat">
+            <input type=date name="data_fi_assignacio_empleat">
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary">Finalitzar assignament</button>
+        <button type="submit" class="btn btn-primary">Finalitzar assignament</button>
       </div>
+      </form>
       </div>
   </div>
 </div>
+                    @endforeach
+                    </tbody>
+                </table>
+
+
             </div>
         </main>
 @endsection

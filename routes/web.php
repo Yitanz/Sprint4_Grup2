@@ -44,15 +44,15 @@
 
  /* RUTES GRUP 2 */
 
- Route::get('/gestio/atraccions/crearassignaciomanteniment', 'AtraccionsController@crearAssignacioManteniment')->name('atraccions.crearassignaciomanteniment');
+ Route::any('/gestio/atraccions/crearassignaciomanteniment/{id}', 'AtraccionsController@crearAssignacioManteniment')->name('atraccions.crearassignaciomanteniment');
 
- Route::get('/gestio/atraccions/crearassignacioneteja', 'AtraccionsController@crearAssignacioNeteja')->name('atraccions.crearassignacioneteja');
+ Route::any('/gestio/atraccions/crearassignacioneteja/{id}', 'AtraccionsController@crearAssignacioNeteja')->name('atraccions.crearassignacioneteja');
 
- Route::get('/gestio/atraccions/crearassignaciogeneral', 'AtraccionsController@crearAssignacioGeneral')->name('atraccions.crearassignaciogeneral');
+ Route::any('/gestio/atraccions/crearassignaciogeneral/{id}', 'AtraccionsController@crearAssignacioGeneral')->name('atraccions.crearassignaciogeneral');
 
- Route::get('/gestio/atraccions/crearassignaciogeneral/{$id}', 'AtraccionsController@guardarAssignacio');
+ Route::post('/gestio/atraccions/crearassignaciomanteniment/guardar/{id}', 'AtraccionsController@guardarAssignacio')->name('atraccions.guardarAssignacio');
 
- Route::get('/gestio/atraccions/assigna', 'AtraccionsController@assigna')->name('atraccions.assigna');
+ Route::any('/gestio/atraccions/assigna', 'AtraccionsController@assigna')->name('atraccions.assigna');
 
  Route::resource('/gestio/atraccions', 'AtraccionsController')->middleware(['auth','is_admin','verified']);
 
