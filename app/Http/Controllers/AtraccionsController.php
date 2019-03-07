@@ -323,8 +323,7 @@ class AtraccionsController extends Controller
             'horaris.torn as id_horari',
         ]);
     
-
-        return view('/gestio/atraccions/crearassignacioneteja', compact('users'));
+        return view('/gestio/atraccions/crearassignacioneteja', compact('users','atraccio'));
     }
 
 
@@ -333,14 +332,14 @@ class AtraccionsController extends Controller
         $atraccio = Atraccion::find($id);
 
         $users = User::whereNotNull('email_verified_at')
-        ->where('id_rol','!=',1)
+        ->where('id_rol',5)
         ->whereNotNull('id_dades_empleat')
         ->leftJoin('dades_empleats','dades_empleats.id', 'users.id_dades_empleat')
         ->leftJoin('rols','rols.id', 'users.id_rol')
         ->leftJoin('horaris', 'horaris.id', 'dades_empleats.id_horari')
         ->get([
-            'users.id as id_empleat',
-            'users.nom as nom_empleat',
+            'users.id',
+            'users.nom',
             'users.cognom1',
             'users.cognom2',
             'users.email',

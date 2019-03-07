@@ -77,24 +77,24 @@
       <div class="modal-body">
         <div class="row">
           <div class="col-6">
-            <h4>Atraccio:</h4>
+            <span>Atraccio:</span>
             <input type="text" class="form-control" name="id_atraccio" value="{{ $atraccio->id }}" hidden/>
             <input type="text" class="form-control" name="nom_atraccio" value="{{ $atraccio->nom_atraccio }}" disabled />
           </div>
           <div class="col-6">
-            <h4>Empleat:</h4>
+            <span>Empleat:</span>
             <input type="text" class="form-control" name="id_empleat" value="{{ $user->id }}" hidden />
             <input type="text" class="form-control" name="nom_empleat" disabled value="{{ $user->nom}}"/>
           </div>
         </div>
         <div class="row">
           <div class="col-6">
-            <h4>Data Inici </h4>
-            <input type=date name="data_inici_assignacio_empleat">
+            <span>Data Inici </span>
+            <input class="form-control" type="date" name="data_inici_assignacio_empleat">
             </div>
             <div class="col-6">
-            <h4>Data Fi </h4>
-            <input type=date name="data_fi_assignacio_empleat">
+            <span>Data Fi </span>
+            <input class="form-control" type="date" name="data_fi_assignacio_empleat">
         </div>
       </div>
       <div class="modal-footer">
