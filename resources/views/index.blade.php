@@ -28,7 +28,14 @@
   </a>
 </div>
 <!-- FI SLIDER -->
-
+ <!-- TEXT DE BENVINGUDA -->
+ <div class="container mt-3">
+  <div class="row">
+    <div class="col-sm-12">
+      <h1 class="display-1 text-center"> Bevingut al parc dels teus somnis!</h1>
+    </div>
+  </div>
+  </div>
 <!-- PROMOCIONS -->
 <div class="container mt-3">
   <div class="row">
