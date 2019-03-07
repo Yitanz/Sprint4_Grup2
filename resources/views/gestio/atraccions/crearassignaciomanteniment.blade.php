@@ -4,7 +4,7 @@
 @endsection
 @section("menuIntranet")
 @endsection
-@section("body")
+@section("content")
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
     <style>
       .uper {
@@ -31,9 +31,11 @@
             </div>
           </div>
 
-            <div class="table-responsive">
-                <table class="table table-bordered table-hover table-sm">
-                    <thead class="thead-light">
+          <div class="col-12">
+        <div class="col-12 table-responsive">
+            <table class="table table-bordered table-hover table-sm dt-responsive nowrap dataTable no-footer dtr-inline collapsed"
+                id="results_table" role="grid">
+      <thead class="thead-light">
                         <tr>
                         <th>Nom</th>
                         <th>Cognom1</th>
@@ -43,7 +45,7 @@
                         <th>Especialitat</th>
                         <th>Càrrec</th>
                         <th>Horari</th>
-                        <th colspan="3">Accions</th>
+                        <th>Accions</th>
                         </tr>
                     </thead>
                 <tbody>
@@ -59,7 +61,7 @@
                         <td>{{ $user->especialitat }}</td>
                         <td>{{ $user->carrec }}</td>
                         <td>{{ $user->id_horari }}</td>
-                        <td><a class="btn btn-success" href="#" data-toggle="modal" data-target="#ModalEmpleat{{$user->id}}">Assignar</a></td>
+                        <td><a class="btn btn-success btn-sm" href="#" data-toggle="modal" data-target="#ModalEmpleat{{$user->id}}">Assignar</a></td>
                     </tr>
 
                     <!-- Modal -->

@@ -4,7 +4,7 @@
 @endsection
 @section("menu2")
 @endsection
-@section("body")
+@section("content")
 @if(session()->get('success'))
   <div class="alert alert-success">
     {{ session()->get('success') }}

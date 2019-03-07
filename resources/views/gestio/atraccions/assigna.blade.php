@@ -4,7 +4,7 @@
 @endsection
 @section("menuIntranet")
 @endsection
-@section("body")
+@section("content")
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
 
   @if(session()->get('success'))
@@ -27,8 +27,11 @@
 				</div>
     </div>
 
-  <table class="table table-striped">
-    <thead>
+    <div class="col-12">
+        <div class="col-12 table-responsive">
+            <table class="table table-bordered table-hover table-sm dt-responsive nowrap dataTable no-footer dtr-inline collapsed"
+                id="results_table" role="grid">
+      <thead class="thead-light">
         <tr>
           <td>ID</td>
           <td>Nom Atraccio</td>
@@ -39,7 +42,7 @@
           <td>Accessibilitat</td>
           <td>Acces Express</td>
           <td>Foto</td>
-          <td colspan="2">Action</td>
+          <td></td>
         </tr>
     </thead>
     <tbody>
@@ -53,9 +56,20 @@
             <td>{{$atraccio->altura_max}}</td>
             <td>{{$atraccio->accessibilitat}}</td>
             <td>{{$atraccio->acces_express}}</td>
-            <td><a href="#" data-toggle="modal" data-target="#exampleModal{{$atraccio->id}}">{{$atraccio->path}}</a></td>
+            <td><a href="#" data-toggle="modal" data-target="#exampleModal{{$atraccio->id}}"><i data-feather="image"></i></a></td>
+            
+            <td>
+            <div class="btn-group" role="group" aria-label="Basic example">
+              <a href="{{ route('atraccions.crearassignaciomanteniment',$atraccio->id)}}" class="btn btn-primary btn-sm">Manteniment</a>
+            <a href="{{ route('atraccions.crearassignacioneteja',$atraccio->id)}}" class="btn btn-primary btn-sm">Neteja</a>
+            <a href="{{ route('atraccions.crearassignaciogeneral',$atraccio->id)}}" class="btn btn-primary btn-sm">Treballador</a>
+</div>
+          </td>
 
-            @if (! is_null($atraccio->path))
+        </tr>
+
+
+        @if (! is_null($atraccio->path))
             <!-- MODAL FOTO -->
             <div class="modal fade" id="exampleModal{{$atraccio->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -69,14 +83,11 @@
             <!-- FI MODAL FOTO -->
             @else
             @endif
-            <td><a href="{{ route('atraccions.crearassignaciomanteniment',$atraccio->id)}}" class="btn btn-primary">Manteniment</a></td>
-            <td><a href="{{ route('atraccions.crearassignacioneteja',$atraccio->id)}}" class="btn btn-primary">Neteja</a></td>
-            <td><a href="{{ route('atraccions.crearassignaciogeneral',$atraccio->id)}}" class="btn btn-primary">Treballador</a></td>
-
-        </tr>
         @endforeach
     </tbody>
   </table>
+</div>
+</div>
 </div>
 </main>
 @endsection

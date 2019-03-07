@@ -8,7 +8,7 @@
 @endsection
 @section("menu2")
 @endsection
-@section("body")
+@section("content")
 <!-- ENTRADES -->
 <div class="container" style="margin-top:30px">
     <form class="needs-validation" method="POST" action="{{ action('HomeController@parc_afegir_cistella') }}" id="form_ticket">

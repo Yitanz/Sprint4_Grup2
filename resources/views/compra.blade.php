@@ -4,7 +4,7 @@
 @endsection
 @section("menu2")
 @endsection
-@section("body")
+@section("content")
 <style>
   .fakeimg {
     height: 200px;

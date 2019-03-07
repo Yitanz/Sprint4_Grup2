@@ -4,7 +4,7 @@
 @endsection
 @section("menuIntranet")
 @endsection
-@section("body")
+@section("content")
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
 
   @if(session()->get('success'))
@@ -39,7 +39,7 @@
           <td>Accessibilitat</td>
           <td>Acces Express</td>
           <td>Foto</td>
-          <td colspan="2">Action</td>
+          <td>Action</td>
         </tr>
     </thead>
     <tbody>
@@ -55,7 +55,17 @@
             <td>{{$atraccio->acces_express}}</td>
             <td><a href="#" data-toggle="modal" data-target="#exampleModal{{$atraccio->id}}">{{$atraccio->path}}</a></td>
 
-            @if (! is_null($atraccio->path))
+
+            <td><a href="{{ route('atraccions.edit',$atraccio->id)}}" class="btn btn-primary">Modificar</a>
+            
+                <form action="{{ route('atraccions.destroy', $atraccio->id)}}" method="post">
+                  @csrf
+                  @method('DELETE')
+                  <button id="confirm_delete" class="btn btn-danger" type="submit">Suprimir</button>
+                </form>
+            </td>
+        </tr>
+        @if (! is_null($atraccio->path))
             <!-- MODAL FOTO -->
             <div class="modal fade" id="exampleModal{{$atraccio->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -66,18 +76,9 @@
                 </div>
               </div>
             </div>
-<!-- FI MODAL FOTO -->
-@else
-@endif
-            <td><a href="{{ route('atraccions.edit',$atraccio->id)}}" class="btn btn-primary">Modificar</a></td>
-            <td>
-                <form action="{{ route('atraccions.destroy', $atraccio->id)}}" method="post">
-                  @csrf
-                  @method('DELETE')
-                  <button class="btn btn-danger" type="submit">Suprimir</button>
-                </form>
-            </td>
-        </tr>
+        <!-- FI MODAL FOTO -->
+        @else
+        @endif
         @endforeach
     </tbody>
   </table>

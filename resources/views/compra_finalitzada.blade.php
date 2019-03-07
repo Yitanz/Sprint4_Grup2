@@ -4,7 +4,7 @@
 @endsection
 @section("menu2")
 @endsection
-@section("body")
+@section("content")
 <div style="width:70%;margin: 0 auto;margin-top:30px;">
   <div class="alert alert-success" role="alert">
   <h4 class="alert-heading">Compra realitzada correctament</h4>

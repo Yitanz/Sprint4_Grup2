@@ -4,7 +4,7 @@
 @endsection
 @section("menu2")
 @endsection
-@section("body")
+@section("content")
 <div class="container px-5 py-5">
     <div class="row justify-content-center align-items-center">
         <div class="card" style="width: 22rem;">

@@ -4,6 +4,6 @@
 @endsection
 @section("menuIntranet")
 @endsection
-@section("body")
+@section("content")
 <p>hola</p>
 @endsection

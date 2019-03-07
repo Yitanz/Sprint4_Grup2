@@ -4,7 +4,7 @@
 @endsection
 @section("menu2")
 @endsection
-@section("body")
+@section("content")
 <!-- CONTACTE -->
 <div class="container jumbotron mt-3">
   <div class="row">

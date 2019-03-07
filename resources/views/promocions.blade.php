@@ -4,7 +4,7 @@
 @endsection
 @section("menu2")
 @endsection
-@section("body")
+@section("content")
 <!-- PROMOCIONS -->
 <div class="container" style="margin-top:30px">
   <div class="row">

@@ -4,7 +4,7 @@
 @endsection
 @section("menuIntranet")
 @endsection
-@section("body")
+@section("content")
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
 
   <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -19,21 +19,10 @@
     </div>
   </div>
 
-  <form method="post" style="margin-top=50px;">
-    <div class="form-row">
-      <div class="col-10">
-        <input class="form-control" type="text" name="filtre" placeholder="Filtrar...">
-      </div>
-      <div class="form-group row">
-        <div class="offset-sm-2 col-sm-10">
-          <input type="submit" class="btn btn-primary" name="buscar" value="Filtrar">
-        </div>
-      </div>
-    </div>
-  </form>
-
-  <div class="table-responsive">
-    <table class="table table-bordered table-hover table-sm">
+  <div class="col-12">
+        <div class="col-12 table-responsive">
+            <table class="table table-bordered table-hover table-sm dt-responsive nowrap dataTable no-footer dtr-inline collapsed"
+                id="results_table" role="grid">
       <thead class="thead-light">
         <tr>
           <th scope="col">Nom</th>
@@ -49,7 +38,7 @@
           <th scope="col">Numero Document</th>
           <th scope="col">Sexe</th>
           <th scope="col">Telèfon</th>
-          <th colspan="2">Acció</th>
+          <th>Acció</th>
         </tr>
       </thead>
       <tbody>
@@ -69,12 +58,12 @@
           <td>{{$usuari->numero_document}}</td>
           <td>{{$usuari->sexe}}</td>
           <td>{{$usuari->telefon}}</td>
-          <td><a href="{{route('clients.edit', $usuari->id)}}" type="button" class="btn btn-primary">Modificar</a></td>
-          <td>
-            <form method="post" action="/gestio/clients/{{$usuari->id}}">
+          <td><a href="{{route('clients.edit', $usuari->id)}}" type="button" class="btn btn-primary">Modificar</a>
+          
+            <form method="post" action="{{route('clients.destroy', $usuari->id)}}">
               @csrf
               @method('DELETE')
-              <button class="btn btn-danger" type="submit" value="Eliminar">Eliminar</button>
+              <button  id="confirm_delete" class="btn btn-danger" type="submit" value="Eliminar">Eliminar</button>
             </form>
           </td>
         </tr>
@@ -82,5 +71,7 @@
       </tbody>
     </table>
   </div>
+</div>
+</div>
 </main>
 @endsection
