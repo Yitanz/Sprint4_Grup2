@@ -20,7 +20,15 @@ class RolsTableSeeder extends Seeder
         ]);
 
         DB::table('rols')->insert([
-            'nom_rol' => 'Treballador'
+            'nom_rol' => 'Manteniment'
+        ]);
+
+        DB::table('rols')->insert([
+            'nom_rol' => 'Neteja'
+        ]);
+
+        DB::table('rols')->insert([
+            'nom_rol' => 'Treballador General'
         ]);
     }
 }
