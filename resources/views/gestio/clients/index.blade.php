@@ -58,13 +58,17 @@
           <td>{{$usuari->numero_document}}</td>
           <td>{{$usuari->sexe}}</td>
           <td>{{$usuari->telefon}}</td>
-          <td><a href="{{route('clients.edit', $usuari->id)}}" type="button" class="btn btn-primary">Modificar</a>
+          <td>
+          <div class="btn-group" role="group" aria-label="Basic example">
+
+            <a href="{{route('clients.edit', $usuari->id)}}" type="button" class="btn btn-primary btn-sm">Modificar</a>
           
             <form method="post" action="{{route('clients.destroy', $usuari->id)}}">
               @csrf
               @method('DELETE')
-              <button  id="confirm_delete" class="btn btn-danger" type="submit" value="Eliminar">Eliminar</button>
+              <button  id="confirm_delete" class="btn btn-danger btn-sm" type="submit" value="Eliminar">Eliminar</button>
             </form>
+</div>
           </td>
         </tr>
         @endforeach

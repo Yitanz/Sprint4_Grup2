@@ -6,7 +6,7 @@
 @endsection
 @section("content")
 <!-- CONTACTE -->
-<div class="container jumbotron mt-3">
+<div  id="app" class="container jumbotron mt-3">
   <div class="row">
       <div class="col-sm-12">
         <h3 class="font-weight-bold text-center text-uppercase">Formulari de contacte</h3>
@@ -32,7 +32,7 @@
       </div>
       <div class="form-group">
         <label>Adreça de correu electrònic</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Escriu el teu email" required>
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Escriu el teu email" autocomplete="on" required>
         <small id="emailHelp" class="form-text text-muted">No compartirem el teu email amb ningú.</small>
       </div>
       <div class="form-group">

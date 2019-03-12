@@ -44,16 +44,16 @@
                   <option value="{{$atraccionetes->id}}">{{$atraccionetes->nom_atraccio}}</option>
                   @endforeach
                 </select>
-                
+
             </div>
             <div class="form-group row">
                   <div class="col-md-6 offset-md-3">
                     <input id="description" type="submit" class="btn btn-primary" value="Pujar Imatge" data-toggle="modal" data-target="#exampleModal"/>
                   </div>
             </div>
-          </form> 
+          </form>
         </div>
-      </div> 
+      </div>
     </div>
   </div>
 </div>

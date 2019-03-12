@@ -56,16 +56,16 @@
                         <td>{{$atraccio->accessibilitat}}</td>
                         <td>{{$atraccio->acces_express}}</td>
                         <td>
-                            <a href="#" data-toggle="modal" data-target="#exampleModal{{$atraccio->id}}">{{$atraccio->path}}</a></td>
+                            <a href="#" data-toggle="modal" data-target="#exampleModal{{$atraccio->id}}"><i data-feather="image"></i></a></td>
 
                         <td>
-                        <div class="btn-group" role="group" aria-label="Basic example">
-                          <a href="{{ route('atraccions.edit',$atraccio->id)}}" class="btn btn-primary">Modificar</a>
+                        <div class="btn-group btn-sm" role="group" aria-label="Basic example">
+                          <a href="{{ route('atraccions.edit',$atraccio->id)}}" class="btn btn-primary btn-sm">Modificar</a>
 
                             <form action="{{ route('atraccions.destroy', $atraccio->id)}}" method="post">
                                 @csrf
                                 @method('DELETE')
-                                <button id="confirm_delete" class="btn btn-danger" type="submit">Suprimir</button>
+                                <button id="confirm_delete" class="btn btn-danger btn-sm" type="submit">Suprimir</button>
                             </form>
                           </div>
                         </td>

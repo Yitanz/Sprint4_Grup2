@@ -17,7 +17,7 @@ use Image;
 
 class ImageController extends Controller
 {
-    
+
 	public function create()
 	{
 
@@ -33,7 +33,7 @@ class ImageController extends Controller
 		   'description' => 'required',
 		   'image_path' => 'required|image'
 		]);
-		   
+
 		//agafant les dades
 		$image_path = $request->file('image_path');
 		$description = $request->input('description');
@@ -64,8 +64,8 @@ class ImageController extends Controller
 	        //header('Content-Type: image/png');
 	        imagepng($im, "img/".$description."_marca.png");
 	        imagedestroy($im);
-	    
-	    //IF per a jpeg 
+
+	    //IF per a jpeg
 	    }else if ($tipus == 'image/jpeg') {
 
 	        $im = imagecreatefromjpeg("../public/img/".$file_name);
@@ -94,7 +94,7 @@ class ImageController extends Controller
 	        imagedestroy($im);
 	       }
 
-	    $imageAigua="img/"."marca".$description;
+	    $imageAigua="img/".$description."_marca.png";
 
 	    $preu=5;
 	    $mida= "800x600px";

@@ -47,6 +47,9 @@ class TendaController extends Controller
 	}
 
   public function imprimirFotos($id){
-      
+
+    $atraccions =  DB::table('atributs_producte')
+                   ->where('id_atraccio',$id)->get();
+    return view ('/tenda/galeria', compact('atraccions'));
   }
 }

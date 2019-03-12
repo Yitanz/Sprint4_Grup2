@@ -45,12 +45,12 @@ class HomeController extends Controller
     {
       return view('noticies');
     }
-  
+
     public function promocions()
     {
       return view("promocions");
     }
-    
+
     public function atraccions(){
       $atraccionetes = DB::table('tipus_atraccions')
       ->join('atraccions', 'atraccions.tipus_atraccio', '=', 'tipus_atraccions.id')
@@ -72,24 +72,24 @@ class HomeController extends Controller
 
       return view("atraccions", compact('atraccionetes'));
     }
-  
+
     public function entrades()
     {
       $tipus_producte = Tipus_producte::all();
 
       return view("entrades", compact('tipus_producte'));
     }
-  
+
     public function login()
     {
       return view("login");
     }
-  
+
     public function contacte()
     {
       return view("contacte");
     }
-  
+
     public function gestio()
     {
       return view("gestio/index");
@@ -104,6 +104,12 @@ class HomeController extends Controller
     {
       return view('pizzeria');
     }
+
+    public function form()
+    {
+      return view('form');
+    }
+
 
     public function incidencia()
     {
@@ -135,7 +141,7 @@ class HomeController extends Controller
             'id_estat' => 1,
             'id_usuari_reportador' => $user->id,
         ]);
-        
+
         $incidencia->save();
 
         return redirect('incidencia')->with('success', 'Incidència reportada correctament');

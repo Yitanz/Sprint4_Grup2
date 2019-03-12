@@ -20,7 +20,8 @@
  Route::get('/perfil',"HomeController@perfil")->name('perfil')->middleware(['auth','verified']);
  Route::get('/incidencia',"HomeController@incidencia")->name('incidencia')->middleware(['auth','verified']);
  Route::get('/pizzeria',"HomeController@pizzeria")->name('pizzeria');
- 
+ Route::get('/form',"HomeController@form")->name('form');
+
  /* RUTES GRUP 1 */
  Auth::routes(['verify' => true]);
 
@@ -61,8 +62,8 @@
  Route::post('/gestio/atraccions/image', 'AtraccionsController@store')->name('image.upload.post')->middleware(['auth','is_admin','verified']);
 
  Route::resource('/gestio/clients', 'ClientsController')->middleware(['auth','is_admin','verified']);
- 
- 
+
+
  /* Guardar PDF */
  Route::get('/view/atraccions/index', 'AtraccionsController@guardarPDF');
 
@@ -83,4 +84,5 @@
  /*Tenda*/
   Route::get('/tenda', 'TendaController@indexTenda')->name('tenda');
   Route::get('/tenda/atraccions', 'TendaController@indexAtraccions')->name('tendaFotos');
-  Route::get('tenda/atraccions/{atraccions}/fotos','TendaController@imprimirFotos');
+  Route::get('/imprimirFotos/{id}','TendaController@imprimirFotos');
+  Route::get('/comprarFotos/{id}','HomeController@comprarFotos');
