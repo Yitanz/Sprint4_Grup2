@@ -31,6 +31,11 @@
             </div>
           </div>
 
+
+
+        @foreach($users as $user)
+
+
           <div class="col-12">
         <div class="col-12 table-responsive">
             <table class="table table-bordered table-hover table-sm dt-responsive nowrap dataTable no-footer dtr-inline collapsed"
@@ -50,7 +55,8 @@
                     </thead>
                 <tbody>
 
-                    @foreach($users as $user)
+
+
 
                     <tr>
                         <td>{{ $user->nom }}</td>
@@ -88,16 +94,7 @@
             <input type="text" class="form-control" name="id_empleat" value="{{ $user->id }}" hidden />
             <input type="text" class="form-control" name="nom_empleat" disabled value="{{ $user->nom}}"/>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-6">
-            <span>Data Inici </span>
-            <input class="form-control" type="date" name="data_inici_assignacio_empleat">
-            </div>
-            <div class="col-6">
-            <span>Data Fi </span>
-            <input class="form-control" type="date" name="data_fi_assignacio_empleat">
-        </div>
+          <br>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -107,11 +104,13 @@
       </div>
   </div>
 </div>
+
                     @endforeach
                     </tbody>
                 </table>
 
-
             </div>
         </main>
+
 @endsection
+@dd($data_fi_global);

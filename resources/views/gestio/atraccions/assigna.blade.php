@@ -57,10 +57,10 @@
             <td>{{$atraccio->accessibilitat}}</td>
             <td>{{$atraccio->acces_express}}</td>
             <td><a href="#" data-toggle="modal" data-target="#exampleModal{{$atraccio->id}}"><i data-feather="image"></i></a></td>
-            
+
             <td>
             <div class="btn-group" role="group" aria-label="Basic example">
-              <a href="{{ route('atraccions.crearassignaciomanteniment',$atraccio->id)}}" class="btn btn-primary btn-sm">Manteniment</a>
+              <a href="{{ route('atraccions.crearassignaciomantenimentdate', $atraccio->id)}}" class="btn btn-primary btn-sm">Manteniment</a>
             <a href="{{ route('atraccions.crearassignacioneteja',$atraccio->id)}}" class="btn btn-primary btn-sm">Neteja</a>
             <a href="{{ route('atraccions.crearassignaciogeneral',$atraccio->id)}}" class="btn btn-primary btn-sm">Treballador</a>
 </div>

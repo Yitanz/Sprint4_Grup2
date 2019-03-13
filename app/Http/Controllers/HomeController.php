@@ -17,6 +17,7 @@ use \App\Cistella;
 use \App\Linia_cistella;
 use \App\Venta_productes;
 use \App\Linia_ventes;
+use \App\Atraccion;
 
 class HomeController extends Controller
 {
@@ -286,6 +287,12 @@ class HomeController extends Controller
       $atributs_producte->delete();
 
       return redirect('/cistella')->with('success', 'Producte eliminat correctament');
+    }
+
+    public function llistarAtraccionsPublic($id)
+    {
+      $atraccions = Atraccion::find($id);
+      return view('/atraccions_generades', compact('atraccions'));
     }
 
 }

@@ -23,6 +23,9 @@ use \App\User;
 
 class AtraccionsController extends Controller
 {
+    private $data_inici_global;
+
+    private $data_fi_global;
     /**
      * Display a listing of the resource.
      *
@@ -50,7 +53,7 @@ class AtraccionsController extends Controller
 
         $atraccions = Atraccion::all();
         return view('gestio/atraccions/index', compact('atraccionetes'));
-      
+
 
     }
 
@@ -86,7 +89,7 @@ class AtraccionsController extends Controller
         $file_path = 'storage/atraccions';
         $img = Image::make($file->getRealPath())->resize(800, 600)
         ->save($file_path."/".$file_name);
-        
+
         $atraccio = new Atraccion([
             'nom_atraccio' => $request->get('nom'),
             'tipus_atraccio' => $request->get('tipusatraccio'),
@@ -148,30 +151,30 @@ class AtraccionsController extends Controller
         $atraccio->altura_max = $request->get('alturamax');
         $atraccio->accessibilitat = $request->get('accessible');
         $atraccio->acces_express = $request->get('accesexpress');
-        
+
         if ($request->has('image')) {
             $image_path = public_path().$atraccio->path;
             if(File::exists($image_path)) {
                 File::delete($image_path);
             }
-        
+
 
             $file = $request->file('image');
             $file_name = time() . $file->getClientOriginalName();
             $file_path = 'storage/atraccions';
             $img = Image::make($file->getRealPath())->resize(800, 600)
-            ->save($file_path."/".$file_name);    
-            
+            ->save($file_path."/".$file_name);
+
             $atraccio->path = "/".$file_path."/".$file_name;
         }
             $atraccio->save();
 //$path=Storage::put($imageName, $laruka2);
 //request()->image->move(public_path('images'), $imageName);
 
-        
+
 
         return redirect('/gestio/atraccions')->with('success', 'atraccio modificada');
-        
+
     }
 
     /**
@@ -218,7 +221,7 @@ class AtraccionsController extends Controller
 
     }
 
-    
+
     public function assigna()
     {
 
@@ -245,8 +248,12 @@ class AtraccionsController extends Controller
     }
 
 
-    public function crearAssignacioManteniment($id)
+    public function crearAssignacioManteniment(Request $request, $id)
     {
+
+    //  dd($request->get('data_fi_assignacio_empleat'));
+
+
         $atraccio = Atraccion::find($id);
         $users = User::whereNotNull('email_verified_at')
         ->where('id_rol',3)
@@ -281,8 +288,21 @@ class AtraccionsController extends Controller
             'dades_empleats.data_fi_contracte as data_fi_contracte',
             'horaris.torn as id_horari',
         ]);
+        $data_inici_global = $request->get('data_inici_assignacio_empleat');
 
-        return view('/gestio/atraccions/crearassignaciomanteniment', compact('users', 'atraccio'));
+        $data_fi_global = $request->get('data_fi_assignacio_empleat');
+
+
+
+        return view('/gestio/atraccions/crearassignaciomanteniment', compact('users', 'atraccio', 'data_fi_global'));
+    }
+
+    public function crearAssignacioMantenimentDate(Request $request, $id)
+{
+//        $id = 1;
+
+        $atraccio = Atraccion::find($id);
+        return view('/gestio/atraccions/crearassignaciomantenimentdate', compact('atraccio','data_fi_global'));
     }
 
 
@@ -322,7 +342,7 @@ class AtraccionsController extends Controller
             'dades_empleats.data_fi_contracte as data_fi_contracte',
             'horaris.torn as id_horari',
         ]);
-    
+
         return view('/gestio/atraccions/crearassignacioneteja', compact('users','atraccio'));
     }
 
@@ -364,7 +384,7 @@ class AtraccionsController extends Controller
             'dades_empleats.data_fi_contracte as data_fi_contracte',
             'horaris.torn as id_horari',
         ]);
-    
+
 
         return view('/gestio/atraccions/crearassignaciogeneral', compact('users', 'atraccio'));
     }
@@ -373,7 +393,6 @@ class AtraccionsController extends Controller
     public function guardarAssignacio(Request $request, $id)
     {
         $atraccio = Atraccion::find($id);
-
         $assignacio = new AssignacioAtraccion([
             'id_empleat'=>$request->get('id_empleat'),
             'id_atraccio'=>$request->get('id_atraccio'),
@@ -383,10 +402,62 @@ class AtraccionsController extends Controller
         $assignacio->save();
 
         return redirect('/gestio/atraccions/assigna')->with('success', 'OK bro :)');
-
-
     }
 
+        public function assignacions()
+        {
+            $assignacio = DB::table('assign_emp_atraccions')
+            ->leftJoin('users','users.id', 'assign_emp_atraccions.id_empleat')
+            ->leftJoin('atraccions','atraccions.id', 'assign_emp_atraccions.id_atraccio')
+            ->leftJoin('rols','rols.id', 'users.id')
+                  ->get([
+                    'assign_emp_atraccions.id as id',
+                    'assign_emp_atraccions.id_empleat as id_empleat',
+                    'assign_emp_atraccions.id_atraccio as id_atraccio',
+                    'assign_emp_atraccions.data_inici as data_inici',
+                    'assign_emp_atraccions.data_fi as data_fi',
+                    'users.nom as nom_empleat',
+                    'users.cognom1 as cognom_empleat',
+                    'atraccions.nom_atraccio as nom_atraccio',
+                    'rols.nom_rol as nom_rol'
+                ]);
+
+            return view('gestio/atraccions/assignacions', compact('assignacio'));
+
+        }
+
+        public function editAssignacions($id)
+        {
+            $assignacio = AssignacioAtraccion::find($id);
+            $dades_user = User::find($assignacio->id_empleat);
+            $dades_atraccio =Atraccion::find($assignacio->id);
+
+            return view('gestio/atraccions/editAssignacions', compact(['assignacio','dades_user','dades_atraccio']));
+        }
+
+        public function updateAssignacions(Request $request, $id)
+        {
+
+            $assignacio = AssignacioAtraccion::findOrFail($id);
+
+            $assignacio->data_inici = $request->get('data_inici');
+            $assignacio->data_fi = $request->get('data_fi');
+
+            $assignacio->save();
+
+
+
+            return redirect('/gestio/atraccions/assignacions')->with('success', 'Assignacio modificada correctament');
+
+        }
+
+        public function destroyAssignacions($id)
+        {
+            $assignacio = AssignacioAtraccion::find($id);
+            $assignacio->delete();
+
+            return view('/gestio/atraccions/assignacions'->with('success', 'Assignacio suprimida correctament'));
+        }
 
 
 

@@ -32,7 +32,7 @@
 
         <div class="form-group">
           <label for="name">Descripcio</label>
-          <textarea name="descripcio" id="descripcio_atraccio"></textarea>
+          <textarea name="descripcio" id="descripcio_atraccio" value={{ $atraccio->descripcio }}  ></textarea>
         </div>
 
         <div class="form-group">
@@ -108,7 +108,7 @@
 
         <button type="submit" class="btn btn-primary">Modificar</button>
         <a href="{{ url()->previous() }}" class="btn btn-primary">Cancel·lar</a>
-      
+
 </form>
   </div>
 </div>
