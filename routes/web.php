@@ -15,6 +15,7 @@
  Route::get('/noticies',"HomeController@noticies")->name('noticies');
  Route::get('/promocions',"HomeController@promocions")->name('promocions');
  Route::get('/atraccions',"HomeController@atraccions")->name('atraccions');
+ Route::get('/atraccions_generades/{id}',"HomeController@llistarAtraccionsPublic")->name('atraccions_generades');
  Route::get('/entrades',"HomeController@entrades")->name('entrades');
  Route::get('/gestio',"HomeController@gestio")->name('gestio')->middleware(['auth','is_admin','verified']);
  Route::get('/perfil',"HomeController@perfil")->name('perfil')->middleware(['auth','verified']);
@@ -44,6 +45,9 @@
  }]);
 
  /* RUTES GRUP 2 */
+ Route::any('/gestio/atraccions/crearassignaciomantenimentdate/{id}','AtraccionsController@crearAssignacioMantenimentDate')->name('atraccions.crearassignaciomantenimentdate');
+ 
+ Route::get('/gestio/atraccions/crearassignaciomanteniment/{id}', 'AtraccionsController@crearAssignacioManteniment')->name('atraccions.crearassignaciomanteniment');
 
  Route::any('/gestio/atraccions/crearassignaciomanteniment/{id}', 'AtraccionsController@crearAssignacioManteniment')->name('atraccions.crearassignaciomanteniment');
 

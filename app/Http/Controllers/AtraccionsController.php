@@ -393,6 +393,13 @@ class AtraccionsController extends Controller
     public function guardarAssignacio(Request $request, $id)
     {
         $atraccio = Atraccion::find($id);
+
+        $request->validate([
+            'id_empleat'=>['required', 'integer'],
+            'id_atraccio'=>['required', 'integer'],
+            'data_inici'=>['required', 'date'],
+            'data_fi'=>['required', 'date'],
+        ]);
         $assignacio = new AssignacioAtraccion([
             'id_empleat'=>$request->get('id_empleat'),
             'id_atraccio'=>$request->get('id_atraccio'),
