@@ -15,7 +15,6 @@
  Route::get('/noticies',"HomeController@noticies")->name('noticies');
  Route::get('/promocions',"HomeController@promocions")->name('promocions');
  Route::get('/atraccions',"HomeController@atraccions")->name('atraccions');
- Route::get('/atraccions_generades/{id}',"HomeController@llistarAtraccionsPublic")->name('atraccions_generades');
  Route::get('/entrades',"HomeController@entrades")->name('entrades');
  Route::get('/gestio',"HomeController@gestio")->name('gestio')->middleware(['auth','is_admin','verified']);
  Route::get('/perfil',"HomeController@perfil")->name('perfil')->middleware(['auth','verified']);
@@ -46,9 +45,7 @@
 
  /* RUTES GRUP 2 */
 
- Route::any('/gestio/atraccions/crearassignaciomantenimentdate/{id}', 'AtraccionsController@crearAssignacioMantenimentDate')->name('atraccions.crearassignaciomantenimentdate');
-
- Route::get('/gestio/atraccions/crearassignaciomanteniment/{id}', 'AtraccionsController@crearAssignacioManteniment')->name('atraccions.crearassignaciomanteniment');
+ Route::any('/gestio/atraccions/crearassignaciomanteniment/{id}', 'AtraccionsController@crearAssignacioManteniment')->name('atraccions.crearassignaciomanteniment');
 
  Route::any('/gestio/atraccions/crearassignacioneteja/{id}', 'AtraccionsController@crearAssignacioNeteja')->name('atraccions.crearassignacioneteja');
 
@@ -59,8 +56,11 @@
  Route::any('/gestio/atraccions/assigna', 'AtraccionsController@assigna')->name('atraccions.assigna');
 
  Route::any('/gestio/atraccions/assignacions', 'AtraccionsController@assignacions')->name('atraccions.assignacions');
+
  Route::any('/gestio/atraccions/assignacions/editAssignacions/{id}', 'AtraccionsController@editAssignacions')->name('atraccions.assignacions.editAssignacions');
+ 
  Route::any('/gestio/atraccions/assignacions/updateAssignacions/{id}', 'AtraccionsController@updateAssignacions')->name('atraccions.assignacions.updateAssignacions');
+ 
  Route::any('/gestio/atraccions/assignacions/destroy', 'AtraccionsController@destroyAssignacions')->name('atraccions.assignacions.destroy');
 
 
@@ -71,7 +71,6 @@
  Route::post('/gestio/atraccions/image', 'AtraccionsController@store')->name('image.upload.post')->middleware(['auth','is_admin','verified']);
 
  Route::resource('/gestio/clients', 'ClientsController')->middleware(['auth','is_admin','verified']);
-
 
 
  /* Guardar PDF */

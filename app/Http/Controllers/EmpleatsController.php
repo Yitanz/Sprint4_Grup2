@@ -79,6 +79,31 @@ class EmpleatsController extends Controller
      */
     public function store(Request $request)
     {
+        $request-> validate([
+            'codi_seg_social' => ['required', 'string', 'max:10', 'min:9'],
+            'num_nomina' => ['required', 'string', 'max:10', 'min:9'],
+            'IBAN' => ['required', 'string', 'max:22', 'min:22'],
+            'especialitat' =>['required', 'string', 'max:200'],
+            'carrec' =>['required', 'string', 'max:200'],
+            'data_inici_contracte' => ['required', 'date'],
+            'data_fi_contracte' => ['required', 'date'],
+            'id_horari' => ['required', 'int'],
+            'nom' => ['required', 'string', 'max:255'],
+            'cognom1' => ['required', 'string', 'max:255'],
+            'cognom2' => ['string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'contrasenya' => ['required', 'string', 'min:6'],
+            'date' => ['required', 'date'],
+            'adreca' => ['required', 'string'],
+            'ciutat' => ['required', 'string'],
+            'provincia' => ['required', 'string'],
+            'cp' => ['required', 'string'],
+            'tipus_document' => ['required'],
+            'numero_document' => ['required'],
+            'sexe' => ['required'],
+            'telefon' => ['required', 'string'],
+        ]);
+        
         $randomPass = str_random(8);
 
         $dadesEmpleat = new DadesEmpleat([
@@ -161,7 +186,7 @@ class EmpleatsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = User::findOrFail($id);
+         $user = User::findOrFail($id);
         $user->nom = $request->get('nom');
         $user->cognom1 = $request->get('cognom1');
         $user->cognom2 = $request->get('cognom2');
