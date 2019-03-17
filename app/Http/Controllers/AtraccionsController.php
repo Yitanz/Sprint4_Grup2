@@ -254,6 +254,10 @@ class AtraccionsController extends Controller
     public function crearAssignacioManteniment(Request $request, $id)
     {
 
+      request()->validate([
+       'data_inici_assignacio_empleat'      => 'required|date|date_format:Y-m-d|before:end_at',
+       'data_fi_assignacio_empleat'        => 'required|date|date_format:Y-m-d|after:start_at',
+      ]);
 
         $data_inici_global = $request->get('data_inici_assignacio_empleat');
         $data_fi_global = $request->get('data_fi_assignacio_empleat');
@@ -300,6 +304,13 @@ class AtraccionsController extends Controller
 
     public function crearAssignacioNeteja(Request $request, $id)
     {
+
+      request()->validate([
+       'data_inici_assignacio_empleat'      => 'required|date|date_format:Y-m-d|before:end_at',
+       'data_fi_assignacio_empleat'        => 'required|date|date_format:Y-m-d|after:start_at',
+      ]);
+
+
       $data_inici_global = $request->get('data_inici_assignacio_empleat');
       $data_fi_global = $request->get('data_fi_assignacio_empleat');
 
@@ -337,6 +348,11 @@ class AtraccionsController extends Controller
 
     public function crearAssignacioGeneral(Request $request, $id)
     {
+
+      request()->validate([
+       'data_inici_assignacio_empleat'      => 'required|date|date_format:Y-m-d|before:end_at',
+       'data_fi_assignacio_empleat'        => 'required|date|date_format:Y-m-d|after:start_at',
+      ]);
       $data_inici_global = $request->get('data_inici_assignacio_empleat');
       $data_fi_global = $request->get('data_fi_assignacio_empleat');
 
@@ -404,8 +420,9 @@ class AtraccionsController extends Controller
 
         }
 
-        public function editAssignacions($id)
+        public function editAssignacions(Request $request, $id)
         {
+
             $assignacio = AssignacioAtraccion::find($id);
             $dades_user = User::find($assignacio->id_empleat);
             $dades_atraccio = Atraccion::find($assignacio->id_atraccio);
@@ -416,6 +433,8 @@ class AtraccionsController extends Controller
 
         public function updateAssignacions(Request $request, $id)
         {
+
+
 
             $assignacio = AssignacioAtraccion::findOrFail($id);
 

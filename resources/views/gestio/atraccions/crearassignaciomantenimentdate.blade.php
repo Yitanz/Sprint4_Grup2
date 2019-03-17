@@ -19,6 +19,16 @@
           </div>
       </div>
       @endif
+
+      @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>La data fi, és anterior a la data inici</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
               <h1 class="h2">Manteniment: Assignar Empleats a Atraccio</h1>
               <div class="btn-toolbar mb-2 mb-md-0">

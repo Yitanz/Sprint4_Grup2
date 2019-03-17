@@ -11,21 +11,23 @@
   <div class="card-header">
     Modificar l'assignacio del empleat
   </div>
-  <div class="card-body">
-    @if ($errors->any())
-      <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-              <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-      </div><br />
-    @endif
+
+  
+  @if ($errors->any())
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+            <li>La data fi, és anterior a la data inici</li>
+        @endforeach
+    </ul>
+</div>
+@endif
+
 
       <form method="post" action="{{ route('atraccions.assignacions.updateAssignacions', $assignacio->id) }}" enctype="multipart/form-data">
         @method('PATCH')
         @csrf
-        
+
         <div class="form-group row">
             <div class="col-md-3 mb-3">
                 <label for="nom">Nom del empleat: </label>
@@ -52,10 +54,10 @@
               <input type="date" class="form-control" name="data_fi" value="{{ $assignacio->data_fi }}">
             </div>
         </div>
-        
+
         <button type="submit" class="btn btn-primary">Modificar</button>
         <a href="{{ url()->previous() }}" class="btn btn-primary">Cancel·lar</a>
-      
+
       </form>
   </div>
 </div>
