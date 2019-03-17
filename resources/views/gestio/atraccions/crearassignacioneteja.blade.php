@@ -20,7 +20,7 @@
     </div>
     @endif
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h1 class="h2">Neteja: assignar empleats a atraccio</h1>
+            <h1 class="h2">Neteja: Assignar Empleats a Atraccio</h1>
             <div class="btn-toolbar mb-2 mb-md-0">
               <div class="btn-group mr-2">
                 <button class="btn btn-sm btn-outline-secondary" value="Exportar">
@@ -31,20 +31,11 @@
             </div>
           </div>
 
-            <form method="post" style="margin-top=50px;">
-              <div class="form-row">
-                <div class="col-10">
-                  <input class="form-control" type="text" name="busqueda_habitacio" placeholder="Filtrar...">
-                </div>
-                <div class="form-group row">
-                  <div class="offset-sm-2 col-sm-10">
-                    <input type="submit" class="btn btn-primary" name="buscar_habitacio" value="Filtrar">
-                  </div>
-                </div>
-              </div>
-            </form>
 
-            <div class="col-12">
+
+
+
+          <div class="col-12">
         <div class="col-12 table-responsive">
             <table class="table table-bordered table-hover table-sm dt-responsive nowrap dataTable no-footer dtr-inline collapsed"
                 id="results_table" role="grid">
@@ -54,31 +45,25 @@
                         <th>Cognom1</th>
                         <th>Cognom2</th>
                         <th>Num Document</th>
-                        <th>Codi Seg Social</th>
-                        <th>Especialitat</th>
-                        <th>Càrrec</th>
-                        <th>Horari</th>
-                        <th></th>
+                        <th>Accions</th>
                         </tr>
                     </thead>
                 <tbody>
 
-                    @foreach($users as $user)
+
+
+                  @foreach($user as $users)
 
                     <tr>
-                        <td>{{ $user->nom }}</td>
-                        <td>{{ $user->cognom1 }}</td>
-                        <td>{{ $user->cognom2 }}</td>
-                        <td>{{ $user->numero_document }}</td>
-                        <td>{{ $user->codi_seg_social }}</td>
-                        <td>{{ $user->especialitat }}</td>
-                        <td>{{ $user->carrec }}</td>
-                        <td>{{ $user->id_horari }}</td>
-                        <td><a class="btn btn-success btn-sm" href="#" data-toggle="modal" data-target="#ModalEmpleat{{$user->id}}">Assignar</a></td>
+                        <td>{{ $users->nom }}</td>
+                        <td>{{ $users->cognom1 }}</td>
+                        <td>{{ $users->cognom2 }}</td>
+                        <td>{{ $users->numero_document }}</td>
+                        <td><a class="btn btn-success btn-sm" href="#" data-toggle="modal" data-target="#ModalEmpleat{{$users->id}}">Assignar</a></td>
                     </tr>
 
                     <!-- Modal -->
-                    <div class="modal fade" id="ModalEmpleat{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="ModalEmpleat{{$users->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -87,7 +72,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form method="post" action="{{ route('atraccions.guardarAssignacio', $atraccio->id) }}" >
+      <form action="{{ route('atraccions.guardarAssignacio', $atraccio->id) }}" >
       @csrf
       <div class="modal-body">
         <div class="row">
@@ -98,19 +83,13 @@
           </div>
           <div class="col-6">
             <span>Empleat:</span>
-            <input type="text" class="form-control" name="id_empleat" value="{{ $user->id }}" hidden />
-            <input type="text" class="form-control" name="nom_empleat" disabled value="{{ $user->nom}}"/>
+            <input type="text" class="form-control" name="id_empleat" value="{{ $users->id }}" hidden />
+            <input type="text" class="form-control" name="nom_empleat" readonly value="{{ $users->nom}}"/>
+            <input type="date" class="form-control" name="data_inici_modal" readonly value="{{ $data_inici_global}}"/>
+            <input type="date" class="form-control" name="data_fi_modal" readonly value="{{ $data_fi_global}}"/>
+
           </div>
-        </div>
-        <div class="row">
-          <div class="col-6">
-            <span>Data Inici </span>
-            <input type="date" class="form-control" name="data_inici_assignacio_empleat">
-            </div>
-            <div class="col-6">
-            <span>Data Fi </span>
-            <input type="date" class="form-control" name="data_fi_assignacio_empleat">
-        </div>
+          <br>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -120,11 +99,12 @@
       </div>
   </div>
 </div>
-    </div>
-    </div>
+
                     @endforeach
                     </tbody>
                 </table>
+
             </div>
         </main>
+
 @endsection

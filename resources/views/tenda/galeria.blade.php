@@ -19,7 +19,7 @@
         <div class="card">
            <img class="card-img-top" width="100px" src="{{url('/')}}/{{ $atraccio->foto_path_aigua}}" alt="Card image" style="width:100%" >
            <div class="card-body d-flex flex-column align-items-start">
-             <a href="{{url("/imprimirFotos/{$atraccio->id}")}}" type="button" class="btn btn-primary">Comprar</a>
+             <a href="{{url("/comprarFotos/{$atraccio->id}")}}" type="button" class="btn btn-primary">Comprar</a>
            </div>
         </div>
       </div>

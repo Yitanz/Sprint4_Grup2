@@ -9,6 +9,7 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Http\File;
 use \App\Atraccion;
 use \App\Imatge;
+use \App\Tipus_producte;
 use Input;
 use \App\Producte;
 use Image;
@@ -98,21 +99,27 @@ class ImageController extends Controller
 
 	    $preu=5;
 	    $mida= "800x600px";
+	    $estat=1;
 
 	    $imatge = new Imatge();
 	    $imatge->foto_path=$image_path;
 	    $imatge->foto_path_aigua=$imageAigua;
-	    $imatge->nom=$description;
+	    $imatge->nom=8;
 	    $imatge->preu=$preu;
 	    $imatge->mida=$mida;
 	    $imatge->id_atraccio=$id_atraccio;
 	    $imatge->save();
 
+    	$atributs_producte = 	Imatge::latest()
+     							->take(1)
+     							->get();
 
 	    $imatge_product = new Producte();
 	    $imatge_product->descripcio=$description;
-	    $imatge_product->atributs=$nom;
-	    $imatge_product->estat="actiu";
+	    $imatge_product->atributs=$atributs_producte[0]->id;
+	    $imatge_product->estat=$estat;
+
+	    $imatge_product->save();
 
 		$atraccions=DB::table('atraccions')->get();
 	   	return view('gestio/imatges/create',compact("atraccions"));

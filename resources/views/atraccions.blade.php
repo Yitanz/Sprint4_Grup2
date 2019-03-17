@@ -20,7 +20,7 @@
            <img class="card-img-top" width="100px" src="{{ $atraccio->path }}" alt="Card image" style="width:100%" >
            <div class="card-body d-flex flex-column align-items-start">
              <h4 class="card-title">   <a href="{{ route('atraccions_generades', $atraccio->id)}}" class="btn btn-primary btn-sm">{{ $atraccio->nom_atraccio }}</h4></a>
-             <p class="card-text">{{ $atraccio->descripcio }}</p>
+             <p class="card-text">{!! $atraccio->descripcio !!}</p>
            </div>
         </div>
   </div>

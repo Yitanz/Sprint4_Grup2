@@ -46,8 +46,12 @@
 
  /* RUTES GRUP 2 */
  Route::any('/gestio/atraccions/crearassignaciomantenimentdate/{id}','AtraccionsController@crearAssignacioMantenimentDate')->name('atraccions.crearassignaciomantenimentdate');
- 
- Route::get('/gestio/atraccions/crearassignaciomanteniment/{id}', 'AtraccionsController@crearAssignacioManteniment')->name('atraccions.crearassignaciomanteniment');
+
+ Route::any('/gestio/atraccions/crearassignacionetejadate/{id}','AtraccionsController@crearAssignacioNetejaDate')->name('atraccions.crearassignacionetejadate');
+
+ Route::any('/gestio/atraccions/crearassignaciogeneraldate/{id}','AtraccionsController@crearAssignacioGeneralDate')->name('atraccions.crearassignaciogeneraldate');
+
+ //Route::get('/gestio/atraccions/crearassignaciomanteniment/{id}', 'AtraccionsController@crearAssignacioManteniment')->name('atraccions.crearassignaciomanteniment');
 
  Route::any('/gestio/atraccions/crearassignaciomanteniment/{id}', 'AtraccionsController@crearAssignacioManteniment')->name('atraccions.crearassignaciomanteniment');
 
@@ -55,17 +59,17 @@
 
  Route::any('/gestio/atraccions/crearassignaciogeneral/{id}', 'AtraccionsController@crearAssignacioGeneral')->name('atraccions.crearassignaciogeneral');
 
- Route::post('/gestio/atraccions/crearassignaciomanteniment/guardar/{id}', 'AtraccionsController@guardarAssignacio')->name('atraccions.guardarAssignacio');
+ Route::any('/gestio/atraccions/crearassignaciomanteniment/guardar/{id}', 'AtraccionsController@guardarAssignacio')->name('atraccions.guardarAssignacio');
 
  Route::any('/gestio/atraccions/assigna', 'AtraccionsController@assigna')->name('atraccions.assigna');
 
  Route::any('/gestio/atraccions/assignacions', 'AtraccionsController@assignacions')->name('atraccions.assignacions');
 
  Route::any('/gestio/atraccions/assignacions/editAssignacions/{id}', 'AtraccionsController@editAssignacions')->name('atraccions.assignacions.editAssignacions');
- 
+
  Route::any('/gestio/atraccions/assignacions/updateAssignacions/{id}', 'AtraccionsController@updateAssignacions')->name('atraccions.assignacions.updateAssignacions');
- 
- Route::any('/gestio/atraccions/assignacions/destroy', 'AtraccionsController@destroyAssignacions')->name('atraccions.assignacions.destroy');
+
+ Route::any('/gestio/atraccions/assignacions/destroy/{id}', 'AtraccionsController@destroyAssignacions')->name('atraccions.assignacions.destroy');
 
 
  Route::resource('/gestio/atraccions', 'AtraccionsController')->middleware(['auth','is_admin','verified']);
@@ -95,7 +99,7 @@
  Route::get('/compra_finalitzada', 'HomeController@compra_finalitzada')->name('compra_finalitzada')->middleware(['auth','verified']);
 
  /*Tenda*/
-  Route::get('/tenda', 'TendaController@indexTenda')->name('tenda');
-  Route::get('/tenda/atraccions', 'TendaController@indexAtraccions')->name('tendaFotos');
-  Route::get('/imprimirFotos/{id}','TendaController@imprimirFotos');
-  Route::get('/comprarFotos/{id}','HomeController@comprarFotos');
+ Route::get('/tenda', 'TendaController@indexTenda')->name('tenda');
+ Route::get('/tenda/atraccions', 'TendaController@indexAtraccions')->name('tendaFotos');
+ Route::get('/imprimirFotos/{id}','TendaController@imprimirFotos');
+ Route::get('/comprarFotos/{id}','TendaController@afegir_Foto');

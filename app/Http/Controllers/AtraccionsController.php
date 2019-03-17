@@ -26,6 +26,9 @@ class AtraccionsController extends Controller
     private $data_inici_global;
 
     private $data_fi_global;
+
+
+
     /**
      * Display a listing of the resource.
      *
@@ -87,7 +90,7 @@ class AtraccionsController extends Controller
         $file = $request->file('image');
         $file_name = time() . $file->getClientOriginalName();
         $file_path = 'storage/atraccions';
-        $img = Image::make($file->getRealPath())->resize(800, 600)
+        $img = Image::make($file->getRealPath())->resize(1280, 720)
         ->save($file_path."/".$file_name);
 
         $atraccio = new Atraccion([
@@ -251,160 +254,128 @@ class AtraccionsController extends Controller
     public function crearAssignacioManteniment(Request $request, $id)
     {
 
-    //  dd($request->get('data_fi_assignacio_empleat'));
 
-
-        $atraccio = Atraccion::find($id);
-        $users = User::whereNotNull('email_verified_at')
-        ->where('id_rol',3)
-        ->whereNotNull('id_dades_empleat')
-        ->leftJoin('dades_empleats','dades_empleats.id', 'users.id_dades_empleat')
-        ->leftJoin('rols','rols.id', 'users.id_rol')
-        ->leftJoin('horaris', 'horaris.id', 'dades_empleats.id_horari')
-        ->get([
-            'users.id as id',
-            'users.nom as nom',
-            'users.cognom1',
-            'users.cognom2',
-            'users.email',
-            'users.password',
-            'users.data_naixement',
-            'users.adreca',
-            'users.ciutat',
-            'users.provincia',
-            'users.codi_postal',
-            'users.tipus_document',
-            'users.numero_document',
-            'users.sexe',
-            'users.telefon',
-            'users.cognom2',
-            'users.id_rol',
-            'dades_empleats.codi_seg_social as codi_seg_social',
-            'dades_empleats.num_nomina as num_nomina',
-            'dades_empleats.IBAN as IBAN',
-            'dades_empleats.especialitat as especialitat',
-            'dades_empleats.carrec as carrec',
-            'dades_empleats.data_inici_contracte as data_inici_contracte',
-            'dades_empleats.data_fi_contracte as data_fi_contracte',
-            'horaris.torn as id_horari',
-        ]);
         $data_inici_global = $request->get('data_inici_assignacio_empleat');
-
         $data_fi_global = $request->get('data_fi_assignacio_empleat');
 
+        //dd(  $data_inici_global );
+        $atraccio = Atraccion::find($id);
+
+        $user = DB::select('SELECT
+        *
+        FROM
+           users
+        WHERE
+            users.id_rol = "3"
+            AND
+           users.id NOT IN
+           (
+              SELECT
+                 assign_emp_atraccions.id_empleat
+              FROM
+                 assign_emp_atraccions
+              WHERE
+                 ( assign_emp_atraccions.data_inici <= "$data_inici_global" AND assign_emp_atraccions.data_fi >= "$data_fi_global")
+                 OR
+                 ( assign_emp_atraccions.data_inici >= "$data_inici_global" AND assign_emp_atraccions.data_fi <= "$data_fi_global")
+               )');
 
 
-        return view('/gestio/atraccions/crearassignaciomanteniment', compact('users', 'atraccio', 'data_fi_global'));
+        return view('/gestio/atraccions/crearassignaciomanteniment', compact('user', 'atraccio', 'data_inici_global', 'data_fi_global'));
     }
 
     public function crearAssignacioMantenimentDate(Request $request, $id)
 {
 //        $id = 1;
-
         $atraccio = Atraccion::find($id);
-        return view('/gestio/atraccions/crearassignaciomantenimentdate', compact('atraccio','data_fi_global'));
+        return view('/gestio/atraccions/crearassignaciomantenimentdate', compact('atraccio'));
+    }
+
+    public function crearAssignacioNetejaDate(Request $request, $id)
+{
+//        $id = 1;
+        $atraccio = Atraccion::find($id);
+        return view('/gestio/atraccions/crearassignacionetejadate', compact('atraccio'));
+    }
+
+    public function crearAssignacioNeteja(Request $request, $id)
+    {
+      $data_inici_global = $request->get('data_inici_assignacio_empleat');
+      $data_fi_global = $request->get('data_fi_assignacio_empleat');
+
+      //dd(  $data_inici_global );
+      $atraccio = Atraccion::find($id);
+
+      $user = DB::select('SELECT
+      *
+      FROM
+         users
+      WHERE
+          users.id_rol = "4"
+          AND
+         users.id NOT IN
+         (
+            SELECT
+               assign_emp_atraccions.id_empleat
+            FROM
+               assign_emp_atraccions
+            WHERE
+               ( assign_emp_atraccions.data_inici <= "$data_inici_global" AND assign_emp_atraccions.data_fi >= "$data_fi_global")
+               OR
+               ( assign_emp_atraccions.data_inici >= "$data_inici_global" AND assign_emp_atraccions.data_fi <= "$data_fi_global")
+             )');
+
+             return view('/gestio/atraccions/crearassignacioneteja', compact('user', 'atraccio', 'data_inici_global', 'data_fi_global'));
+    }
+
+    public function crearAssignacioGeneralDate(Request $request, $id)
+  {
+    $atraccio = Atraccion::find($id);
+    return view('/gestio/atraccions/crearassignaciogeneraldate', compact('atraccio'));
     }
 
 
-    public function crearAssignacioNeteja($id)
+    public function crearAssignacioGeneral(Request $request, $id)
     {
-        $atraccio = Atraccion::find($id);
-        $users = User::whereNotNull('email_verified_at')
-        ->where('id_rol',4)
-        ->whereNotNull('id_dades_empleat')
-        ->leftJoin('dades_empleats','dades_empleats.id', 'users.id_dades_empleat')
-        ->leftJoin('rols','rols.id', 'users.id_rol')
-        ->leftJoin('horaris', 'horaris.id', 'dades_empleats.id_horari')
-        ->get([
-            'users.id',
-            'users.nom',
-            'users.cognom1',
-            'users.cognom2',
-            'users.email',
-            'users.password',
-            'users.data_naixement',
-            'users.adreca',
-            'users.ciutat',
-            'users.provincia',
-            'users.codi_postal',
-            'users.tipus_document',
-            'users.numero_document',
-            'users.sexe',
-            'users.telefon',
-            'users.cognom2',
-            'users.id_rol',
-            'dades_empleats.codi_seg_social as codi_seg_social',
-            'dades_empleats.num_nomina as num_nomina',
-            'dades_empleats.IBAN as IBAN',
-            'dades_empleats.especialitat as especialitat',
-            'dades_empleats.carrec as carrec',
-            'dades_empleats.data_inici_contracte as data_inici_contracte',
-            'dades_empleats.data_fi_contracte as data_fi_contracte',
-            'horaris.torn as id_horari',
-        ]);
+      $data_inici_global = $request->get('data_inici_assignacio_empleat');
+      $data_fi_global = $request->get('data_fi_assignacio_empleat');
 
-        return view('/gestio/atraccions/crearassignacioneteja', compact('users','atraccio'));
-    }
+      //dd(  $data_inici_global );
+      $atraccio = Atraccion::find($id);
 
+      $user = DB::select('SELECT
+      *
+      FROM
+         users
+      WHERE
+          users.id_rol = "5"
+          AND
+         users.id NOT IN
+         (
+            SELECT
+               assign_emp_atraccions.id_empleat
+            FROM
+               assign_emp_atraccions
+            WHERE
+               ( assign_emp_atraccions.data_inici <= "$data_inici_global" AND assign_emp_atraccions.data_fi >= "$data_fi_global")
+               OR
+               ( assign_emp_atraccions.data_inici >= "$data_inici_global" AND assign_emp_atraccions.data_fi <= "$data_fi_global")
+             )');
 
-    public function crearAssignacioGeneral($id)
-    {
-        $atraccio = Atraccion::find($id);
-
-        $users = User::whereNotNull('email_verified_at')
-        ->where('id_rol',5)
-        ->whereNotNull('id_dades_empleat')
-        ->leftJoin('dades_empleats','dades_empleats.id', 'users.id_dades_empleat')
-        ->leftJoin('rols','rols.id', 'users.id_rol')
-        ->leftJoin('horaris', 'horaris.id', 'dades_empleats.id_horari')
-        ->get([
-            'users.id',
-            'users.nom',
-            'users.cognom1',
-            'users.cognom2',
-            'users.email',
-            'users.password',
-            'users.data_naixement',
-            'users.adreca',
-            'users.ciutat',
-            'users.provincia',
-            'users.codi_postal',
-            'users.tipus_document',
-            'users.numero_document',
-            'users.sexe',
-            'users.telefon',
-            'users.cognom2',
-            'users.id_rol',
-            'dades_empleats.codi_seg_social as codi_seg_social',
-            'dades_empleats.num_nomina as num_nomina',
-            'dades_empleats.IBAN as IBAN',
-            'dades_empleats.especialitat as especialitat',
-            'dades_empleats.carrec as carrec',
-            'dades_empleats.data_inici_contracte as data_inici_contracte',
-            'dades_empleats.data_fi_contracte as data_fi_contracte',
-            'horaris.torn as id_horari',
-        ]);
-
-
-        return view('/gestio/atraccions/crearassignaciogeneral', compact('users', 'atraccio'));
+             return view('/gestio/atraccions/crearassignaciogeneral', compact('user', 'atraccio', 'data_inici_global', 'data_fi_global'));
     }
 
 
     public function guardarAssignacio(Request $request, $id)
     {
-        $atraccio = Atraccion::find($id);
 
-        $request->validate([
-            'id_empleat'=>['required', 'integer'],
-            'id_atraccio'=>['required', 'integer'],
-            'data_inici'=>['required', 'date'],
-            'data_fi'=>['required', 'date'],
-        ]);
+        $atraccio = Atraccion::find($id);
         $assignacio = new AssignacioAtraccion([
             'id_empleat'=>$request->get('id_empleat'),
             'id_atraccio'=>$request->get('id_atraccio'),
-            'data_inici'=>$request->get('data_inici_assignacio_empleat'),
-            'data_fi'=>$request->get('data_fi_assignacio_empleat')
+            'data_inici'=> $request->get('data_inici_modal'),
+            'data_fi'=>$request->get('data_fi_modal')
+
         ]);
         $assignacio->save();
 
@@ -437,7 +408,8 @@ class AtraccionsController extends Controller
         {
             $assignacio = AssignacioAtraccion::find($id);
             $dades_user = User::find($assignacio->id_empleat);
-            $dades_atraccio =Atraccion::find($assignacio->id);
+            $dades_atraccio = Atraccion::find($assignacio->id_atraccio);
+
 
             return view('gestio/atraccions/editAssignacions', compact(['assignacio','dades_user','dades_atraccio']));
         }
@@ -461,9 +433,10 @@ class AtraccionsController extends Controller
         public function destroyAssignacions($id)
         {
             $assignacio = AssignacioAtraccion::find($id);
+
             $assignacio->delete();
 
-            return view('/gestio/atraccions/assignacions'->with('success', 'Assignacio suprimida correctament'));
+            return redirect('/gestio/atraccions/assignacions')->with('success', 'Assignacio suprimida correctament');
         }
 
 
