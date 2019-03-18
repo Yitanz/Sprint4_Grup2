@@ -85,9 +85,16 @@
             <span>Empleat:</span>
             <input type="text" class="form-control" name="id_empleat" value="{{ $users->id }}" hidden />
             <input type="text" class="form-control" name="nom_empleat" readonly value="{{ $users->nom}}"/>
-            <input type="date" class="form-control" name="data_inici_modal" readonly value="{{ $data_inici_global}}"/>
-            <input type="date" class="form-control" name="data_fi_modal" readonly value="{{ $data_fi_global}}"/>
 
+          </div>
+          <div class="col-6">
+            <span>Data Inici:</span>
+            <input type="date" class="form-control" name="data_inici_modal" readonly value="{{ $data_inici_global}}"/>
+          </div>
+
+          <div class="col-6">
+            <span>Data Fi:</span>
+            <input type="date" class="form-control" name="data_fi_modal" readonly value="{{ $data_fi_global}}"/>
           </div>
           <br>
       </div>
