@@ -154,6 +154,8 @@ class AtraccionsController extends Controller
         $atraccio->altura_max = $request->get('alturamax');
         $atraccio->accessibilitat = $request->get('accessible');
         $atraccio->acces_express = $request->get('accesexpress');
+        $atraccio->descripcio = $request->get('descripcio');
+
 
         if ($request->has('image')) {
             $image_path = public_path().$atraccio->path;
@@ -165,14 +167,13 @@ class AtraccionsController extends Controller
             $file = $request->file('image');
             $file_name = time() . $file->getClientOriginalName();
             $file_path = 'storage/atraccions';
-            $img = Image::make($file->getRealPath())->resize(800, 600)
+            $img = Image::make($file->getRealPath())->resize(1280, 720)
             ->save($file_path."/".$file_name);
 
             $atraccio->path = "/".$file_path."/".$file_name;
         }
             $atraccio->save();
-//$path=Storage::put($imageName, $laruka2);
-//request()->image->move(public_path('images'), $imageName);
+
 
 
 
@@ -246,7 +247,6 @@ class AtraccionsController extends Controller
 
             ]);
 
-        //$atraccions = Atraccion::all();
         return view('/gestio/atraccions/assigna', compact('atraccionetes'));
     }
 
@@ -262,27 +262,9 @@ class AtraccionsController extends Controller
         $data_inici_global = $request->get('data_inici_assignacio_empleat');
         $data_fi_global = $request->get('data_fi_assignacio_empleat');
 
-        //dd(  $data_inici_global );
         $atraccio = Atraccion::find($id);
 
-        $user = DB::select('SELECT
-        *
-        FROM
-           users
-        WHERE
-            users.id_rol = "3"
-            AND
-           users.id NOT IN
-           (
-              SELECT
-                 assign_emp_atraccions.id_empleat
-              FROM
-                 assign_emp_atraccions
-              WHERE
-                 ( assign_emp_atraccions.data_inici <= "$data_inici_global" AND assign_emp_atraccions.data_fi >= "$data_fi_global")
-                 OR
-                 ( assign_emp_atraccions.data_inici >= "$data_inici_global" AND assign_emp_atraccions.data_fi <= "$data_fi_global")
-               )');
+        $user = AssignacioAtraccion::assignarMantenimentFiltro();
 
 
         return view('/gestio/atraccions/crearassignaciomanteniment', compact('user', 'atraccio', 'data_inici_global', 'data_fi_global'));
@@ -290,14 +272,12 @@ class AtraccionsController extends Controller
 
     public function crearAssignacioMantenimentDate(Request $request, $id)
 {
-//        $id = 1;
         $atraccio = Atraccion::find($id);
         return view('/gestio/atraccions/crearassignaciomantenimentdate', compact('atraccio'));
     }
 
     public function crearAssignacioNetejaDate(Request $request, $id)
 {
-//        $id = 1;
         $atraccio = Atraccion::find($id);
         return view('/gestio/atraccions/crearassignacionetejadate', compact('atraccio'));
     }
@@ -309,32 +289,13 @@ class AtraccionsController extends Controller
        'data_inici_assignacio_empleat'      => 'required|date|date_format:Y-m-d|before:end_at',
        'data_fi_assignacio_empleat'        => 'required|date|date_format:Y-m-d|after:start_at',
       ]);
-
+$user = AssignacioAtraccion::assignarNetejaFiltro();
 
       $data_inici_global = $request->get('data_inici_assignacio_empleat');
       $data_fi_global = $request->get('data_fi_assignacio_empleat');
 
-      //dd(  $data_inici_global );
       $atraccio = Atraccion::find($id);
 
-      $user = DB::select('SELECT
-      *
-      FROM
-         users
-      WHERE
-          users.id_rol = "4"
-          AND
-         users.id NOT IN
-         (
-            SELECT
-               assign_emp_atraccions.id_empleat
-            FROM
-               assign_emp_atraccions
-            WHERE
-               ( assign_emp_atraccions.data_inici <= "$data_inici_global" AND assign_emp_atraccions.data_fi >= "$data_fi_global")
-               OR
-               ( assign_emp_atraccions.data_inici >= "$data_inici_global" AND assign_emp_atraccions.data_fi <= "$data_fi_global")
-             )');
 
              return view('/gestio/atraccions/crearassignacioneteja', compact('user', 'atraccio', 'data_inici_global', 'data_fi_global'));
     }
@@ -355,28 +316,10 @@ class AtraccionsController extends Controller
       ]);
       $data_inici_global = $request->get('data_inici_assignacio_empleat');
       $data_fi_global = $request->get('data_fi_assignacio_empleat');
-
-      //dd(  $data_inici_global );
       $atraccio = Atraccion::find($id);
 
-      $user = DB::select('SELECT
-      *
-      FROM
-         users
-      WHERE
-          users.id_rol = "5"
-          AND
-         users.id NOT IN
-         (
-            SELECT
-               assign_emp_atraccions.id_empleat
-            FROM
-               assign_emp_atraccions
-            WHERE
-               ( assign_emp_atraccions.data_inici <= "$data_inici_global" AND assign_emp_atraccions.data_fi >= "$data_fi_global")
-               OR
-               ( assign_emp_atraccions.data_inici >= "$data_inici_global" AND assign_emp_atraccions.data_fi <= "$data_fi_global")
-             )');
+      $user = AssignacioAtraccion::assignarGeneralFiltro();
+
 
              return view('/gestio/atraccions/crearassignaciogeneral', compact('user', 'atraccio', 'data_inici_global', 'data_fi_global'));
     }

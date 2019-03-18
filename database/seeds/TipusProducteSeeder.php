@@ -46,5 +46,9 @@ class TipusProducteSeeder extends Seeder
             'preu_base' => '7'
         ]);
 
+        DB::table('tipus_producte')->insert([
+          'nom' => 'foto',
+          'preu_base' => '5'
+        ]);
     }
 }

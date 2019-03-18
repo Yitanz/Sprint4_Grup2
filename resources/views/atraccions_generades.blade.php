@@ -1,4 +1,5 @@
 @extends("layouts.plantilla")
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <style>
 
 
@@ -15,7 +16,6 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-
 }
 
 .ml1 {
@@ -78,9 +78,7 @@
 
 
 
-
-
-<div class="container" style="margin-top:30px">
+<div class="container" style="margin-top:30px; text-align:justify">
   <div class="row">
       <div class="col-sm-12">
         <div class="jumbotron">
@@ -88,22 +86,40 @@
              <h3>Descripcio</h3>
              <p class="card-text">{!! $atraccions->descripcio !!}</p>
            </div>
-           <div class="col-sm-12">
-             <table id="t01">
+           <div class="col-sm-6 offset-md-3">
+             <table id="t01" class="table table-striped">
+               <tr>
+                 <th><span><i class="fas fa-dice"></i></span> &nbsp;&nbsp;Tipus atraccio: </th>
+                 <td style="height:30px">{{ $tipus_atraccio->tipus }}</td>
+               </tr>
               <tr>
-                <th>Firstname</th>
-                <th>Lastname</th>
-                <th>Age</th>
+                <th><span><i class="fas fa-user"></i></span> &nbsp;&nbsp;Altura minima: &nbsp;&nbsp;&nbsp;&nbsp;</th>
+                <td style="height:30px">{{ $atraccions->altura_min }}</td>
               </tr>
               <tr>
-                <td>Eve</td>
-                <td>Jackson</td>
-                <td>94</td>
+                <th><span><i class="fas fa-user"></i></span> &nbsp;&nbsp;Altura maxima: </th>
+                <td style="height:30px">{{ $atraccions->altura_max }}</td>
+              </tr>
+              <tr>
+                <th><span><i class="fas fa-wheelchair"></i></span> &nbsp;&nbsp;Accés per a minusvàlids: &nbsp;&nbsp;&nbsp;&nbsp;</th>
+                @if($atraccions->accessibilitat == 1)
+                <td style="height:30px">Si</td>
+                @else
+                <td style="height:30px">No</td>
+                @endif
+              </tr>
+              <tr>
+                <th><span><i class="fas fa-running"></i></span> &nbsp;&nbsp;Acces Express: </th>
+                @if($atraccions->acces_express == 1)
+                <td style="height:30px">Si</td>
+                @else
+                <td style="height:30px">No</td>
+                @endif
+              </tr>
               </tr>
              </table>
            </div>
           </div>
-
 <!-- llistar dades atraccio-->
 
 

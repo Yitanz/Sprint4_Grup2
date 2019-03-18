@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\AssignacioAtraccion' => $baseDir . '/app/AssignacioAtraccion.php',
     'App\\Atraccion' => $baseDir . '/app/Atraccion.php',
     'App\\Atributs_producte' => $baseDir . '/app/Atributs_producte.php',
     'App\\Cistella' => $baseDir . '/app/Cistella.php',
@@ -26,6 +27,7 @@ return array(
     'App\\Http\\Controllers\\ImageController' => $baseDir . '/app/Http/Controllers/ImageController.php',
     'App\\Http\\Controllers\\IncidenciesController' => $baseDir . '/app/Http/Controllers/IncidenciesController.php',
     'App\\Http\\Controllers\\ServeisController' => $baseDir . '/app/Http/Controllers/ServeisController.php',
+    'App\\Http\\Controllers\\TendaController' => $baseDir . '/app/Http/Controllers/TendaController.php',
     'App\\Http\\Controllers\\VentesController' => $baseDir . '/app/Http/Controllers/VentesController.php',
     'App\\Http\\Controllers\\ZonesController' => $baseDir . '/app/Http/Controllers/ZonesController.php',
     'App\\Http\\Controllers\\gestioProductes' => $baseDir . '/app/Http/Controllers/gestioProductes.php',
@@ -57,6 +59,7 @@ return array(
     'App\\User' => $baseDir . '/app/User.php',
     'App\\Venta_productes' => $baseDir . '/app/Venta_productes.php',
     'App\\Zona' => $baseDir . '/app/Zona.php',
+    'AtraccionsSeeder' => $baseDir . '/database/seeds/AtraccionsSeeder.php',
     'BaconQrCode\\Common\\AbstractEnum' => $vendorDir . '/bacon/bacon-qr-code/src/BaconQrCode/Common/AbstractEnum.php',
     'BaconQrCode\\Common\\BitArray' => $vendorDir . '/bacon/bacon-qr-code/src/BaconQrCode/Common/BitArray.php',
     'BaconQrCode\\Common\\BitMatrix' => $vendorDir . '/bacon/bacon-qr-code/src/BaconQrCode/Common/BitMatrix.php',
@@ -109,6 +112,7 @@ return array(
     'Carbon\\Exceptions\\InvalidDateException' => $vendorDir . '/nesbot/carbon/src/Carbon/Exceptions/InvalidDateException.php',
     'Carbon\\Laravel\\ServiceProvider' => $vendorDir . '/nesbot/carbon/src/Carbon/Laravel/ServiceProvider.php',
     'Carbon\\Translator' => $vendorDir . '/nesbot/carbon/src/Carbon/Translator.php',
+    'CategoriesSeeder' => $baseDir . '/database/seeds/CategoriesSeeder.php',
     'Cpdf' => $vendorDir . '/dompdf/dompdf/lib/Cpdf.php',
     'Cron\\AbstractField' => $vendorDir . '/dragonmantank/cron-expression/src/Cron/AbstractField.php',
     'Cron\\CronExpression' => $vendorDir . '/dragonmantank/cron-expression/src/Cron/CronExpression.php',
@@ -2935,6 +2939,7 @@ return array(
     'PhpParser\\Parser\\Tokens' => $vendorDir . '/nikic/php-parser/lib/PhpParser/Parser/Tokens.php',
     'PhpParser\\PrettyPrinterAbstract' => $vendorDir . '/nikic/php-parser/lib/PhpParser/PrettyPrinterAbstract.php',
     'PhpParser\\PrettyPrinter\\Standard' => $vendorDir . '/nikic/php-parser/lib/PhpParser/PrettyPrinter/Standard.php',
+    'ProductesSeeder' => $baseDir . '/database/seeds/ProductesSeeder.php',
     'Prophecy\\Argument' => $vendorDir . '/phpspec/prophecy/src/Prophecy/Argument.php',
     'Prophecy\\Argument\\ArgumentsWildcard' => $vendorDir . '/phpspec/prophecy/src/Prophecy/Argument/ArgumentsWildcard.php',
     'Prophecy\\Argument\\Token\\AnyValueToken' => $vendorDir . '/phpspec/prophecy/src/Prophecy/Argument/Token/AnyValueToken.php',

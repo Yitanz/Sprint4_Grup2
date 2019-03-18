@@ -32,7 +32,7 @@
 
         <div class="form-group">
           <label for="name">Descripcio</label>
-          <textarea name="descripcio" id="descripcio_atraccio" value={{ $atraccio->descripcio }}  ></textarea>
+          <textarea name="descripcio" id="descripcio_atraccio" value="{{ $atraccio->descripcio }}"  ></textarea>
         </div>
 
         <div class="form-group">

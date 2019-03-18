@@ -462,6 +462,7 @@ class ComposerStaticIniteebf4e4e1a793206d9c4848d704bcf77
     );
 
     public static $classMap = array (
+        'App\\AssignacioAtraccion' => __DIR__ . '/../..' . '/app/AssignacioAtraccion.php',
         'App\\Atraccion' => __DIR__ . '/../..' . '/app/Atraccion.php',
         'App\\Atributs_producte' => __DIR__ . '/../..' . '/app/Atributs_producte.php',
         'App\\Cistella' => __DIR__ . '/../..' . '/app/Cistella.php',
@@ -482,6 +483,7 @@ class ComposerStaticIniteebf4e4e1a793206d9c4848d704bcf77
         'App\\Http\\Controllers\\ImageController' => __DIR__ . '/../..' . '/app/Http/Controllers/ImageController.php',
         'App\\Http\\Controllers\\IncidenciesController' => __DIR__ . '/../..' . '/app/Http/Controllers/IncidenciesController.php',
         'App\\Http\\Controllers\\ServeisController' => __DIR__ . '/../..' . '/app/Http/Controllers/ServeisController.php',
+        'App\\Http\\Controllers\\TendaController' => __DIR__ . '/../..' . '/app/Http/Controllers/TendaController.php',
         'App\\Http\\Controllers\\VentesController' => __DIR__ . '/../..' . '/app/Http/Controllers/VentesController.php',
         'App\\Http\\Controllers\\ZonesController' => __DIR__ . '/../..' . '/app/Http/Controllers/ZonesController.php',
         'App\\Http\\Controllers\\gestioProductes' => __DIR__ . '/../..' . '/app/Http/Controllers/gestioProductes.php',
@@ -513,6 +515,7 @@ class ComposerStaticIniteebf4e4e1a793206d9c4848d704bcf77
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
         'App\\Venta_productes' => __DIR__ . '/../..' . '/app/Venta_productes.php',
         'App\\Zona' => __DIR__ . '/../..' . '/app/Zona.php',
+        'AtraccionsSeeder' => __DIR__ . '/../..' . '/database/seeds/AtraccionsSeeder.php',
         'BaconQrCode\\Common\\AbstractEnum' => __DIR__ . '/..' . '/bacon/bacon-qr-code/src/BaconQrCode/Common/AbstractEnum.php',
         'BaconQrCode\\Common\\BitArray' => __DIR__ . '/..' . '/bacon/bacon-qr-code/src/BaconQrCode/Common/BitArray.php',
         'BaconQrCode\\Common\\BitMatrix' => __DIR__ . '/..' . '/bacon/bacon-qr-code/src/BaconQrCode/Common/BitMatrix.php',
@@ -565,6 +568,7 @@ class ComposerStaticIniteebf4e4e1a793206d9c4848d704bcf77
         'Carbon\\Exceptions\\InvalidDateException' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Exceptions/InvalidDateException.php',
         'Carbon\\Laravel\\ServiceProvider' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Laravel/ServiceProvider.php',
         'Carbon\\Translator' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Translator.php',
+        'CategoriesSeeder' => __DIR__ . '/../..' . '/database/seeds/CategoriesSeeder.php',
         'Cpdf' => __DIR__ . '/..' . '/dompdf/dompdf/lib/Cpdf.php',
         'Cron\\AbstractField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/AbstractField.php',
         'Cron\\CronExpression' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/CronExpression.php',
@@ -3391,6 +3395,7 @@ class ComposerStaticIniteebf4e4e1a793206d9c4848d704bcf77
         'PhpParser\\Parser\\Tokens' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Parser/Tokens.php',
         'PhpParser\\PrettyPrinterAbstract' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/PrettyPrinterAbstract.php',
         'PhpParser\\PrettyPrinter\\Standard' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/PrettyPrinter/Standard.php',
+        'ProductesSeeder' => __DIR__ . '/../..' . '/database/seeds/ProductesSeeder.php',
         'Prophecy\\Argument' => __DIR__ . '/..' . '/phpspec/prophecy/src/Prophecy/Argument.php',
         'Prophecy\\Argument\\ArgumentsWildcard' => __DIR__ . '/..' . '/phpspec/prophecy/src/Prophecy/Argument/ArgumentsWildcard.php',
         'Prophecy\\Argument\\Token\\AnyValueToken' => __DIR__ . '/..' . '/phpspec/prophecy/src/Prophecy/Argument/Token/AnyValueToken.php',

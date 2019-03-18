@@ -18,6 +18,9 @@ use \App\Linia_cistella;
 use \App\Venta_productes;
 use \App\Linia_ventes;
 use \App\Atraccion;
+use \App\User;
+use \App\TipusAtraccions;
+
 
 class HomeController extends Controller
 {
@@ -300,22 +303,42 @@ class HomeController extends Controller
 
     public function cistella(){
 
-      $linia_cistella = DB::table('cistelles')
+      $linia_cistella = Cistella::join('linia_cistelles', 'linia_cistelles.id_cistella', '=', 'cistelles.id')
+          ->join('productes', 'linia_cistelles.producte', '=', 'productes.id')
+          ->join('atributs_producte', 'productes.atributs', '=', 'atributs_producte.id')
+          ->join('tipus_producte', 'atributs_producte.nom', '=', 'tipus_producte.id')
+          ->select('linia_cistelles.id as id', 'tipus_producte.nom as nom' ,'atributs_producte.tickets_viatges as tickets_viatges', 'atributs_producte.mida as mida', 'atributs_producte.preu as preu', 'linia_cistelles.quantitat as quantitat')
+          ->where('cistelles.id_usuari', '=', Auth::id())
+          ->where('atributs_producte.foto_path_aigua','=', null)
+          ->orderBy('nom', 'ASC')
+          ->paginate(100);
+
+          $numeroTickets = $linia_cistella->count();
+
+      $total = 0;
+      $total2=0;
+      $compteTotal=0;
+
+      $fotos = DB::table('cistelles')
 
           ->join('linia_cistelles', 'linia_cistelles.id_cistella', '=', 'cistelles.id')
           ->join('productes', 'linia_cistelles.producte', '=', 'productes.id')
           ->join('atributs_producte', 'productes.atributs', '=', 'atributs_producte.id')
           ->join('tipus_producte', 'atributs_producte.nom', '=', 'tipus_producte.id')
-          //->paginate(10, array('productes.id as id', 'tipus_producte.nom as nom', 'atributs_producte.mida as mida', 'atributs_producte.tickets_viatges as tickets_viatges', 'atributs_producte.foto_path as foto_path', 'atributs_producte.foto_path_aigua as foto_path_aigua', 'atributs_producte.preu as preu', 'productes.descripcio as descripcio', 'productes.estat as estat'));
-          ->select('linia_cistelles.id as id', 'tipus_producte.nom as nom' ,'atributs_producte.tickets_viatges as tickets_viatges', 'atributs_producte.mida as mida', 'atributs_producte.preu as preu', 'linia_cistelles.quantitat as quantitat')
+          ->select('linia_cistelles.id as id', 'tipus_producte.nom as nom' ,'atributs_producte.tickets_viatges as tickets_viatges', 'atributs_producte.mida as mida', 'atributs_producte.preu as preu','atributs_producte.foto_path_aigua as fotoaigua', 'linia_cistelles.quantitat as quantitat')
           ->where('cistelles.id_usuari', '=', Auth::id())
-          //->whereRaw('tipus_producte.nom like ?', [$reeee])
+          ->where('atributs_producte.foto_path_aigua','!=', null)
           ->orderBy('nom', 'ASC')
           ->paginate(100);
 
-      $total = 0;
+      $numeroFotos = $fotos->count();
 
-          return view('/cistella', compact('linia_cistella', 'total'));
+      $user = Auth::user();
+
+      $usuari = User::where('id', '=', Auth::id());
+
+          return view('/cistella', compact('linia_cistella', 'total','fotos','total2','compteTotal','numeroFotos','numeroTickets','user'));
+
 
     }
 
@@ -326,17 +349,17 @@ class HomeController extends Controller
       $atributs_producte = Atributs_producte::find($producte->atributs);
 
       $linia_cistella->delete();
-      $producte->delete();
-      $atributs_producte->delete();
+      //$producte->delete();
+      //$atributs_producte->delete();
 
       return redirect('/cistella')->with('success', 'Producte eliminat correctament');
     }
 
-        public function llistarAtraccionsPublic($id)
+    public function llistarAtraccionsPublic($id)
     {
       $atraccions = Atraccion::find($id);
-      return view('/atraccions_generades', compact('atraccions'));
+      $tipus_atraccio = TipusAtraccions::find($atraccions->tipus_atraccio);
+      return view('/atraccions_generades', compact('atraccions', 'tipus_atraccio'));
     }
-
 
 }

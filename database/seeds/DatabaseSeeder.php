@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             TipusAtraccionsTableSeeder::class,
             TipusProducteSeeder::class,
             ZonesSeeder::class,
+            ProductesSeeder::class,
         ]);
     }
 }

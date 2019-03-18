@@ -40,7 +40,7 @@
                         <td>Altura Maxima</td>
                         <td>Accessibilitat</td>
                         <td>Acces Express</td>
-                        <td>Foto</td>
+                        <td >Foto</td>
                         <td></td>
                     </tr>
                 </thead>
